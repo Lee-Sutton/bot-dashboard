@@ -1,8 +1,8 @@
 <template name="botList">
   <h2>Reddit Bots</h2>
-  <ul>
-    {{#each bots}}
-        <p>Bot would go here</p>
-    {{/each}}
-  </ul>
+    <ul data-cy='bot-list'>
+        {{#each bots}}
+            <p>{{name}}</p>
+        {{/each}}
+    </ul>
 </template>

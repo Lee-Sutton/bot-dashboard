@@ -11,7 +11,7 @@ Template.botList.onCreated(function () {
 
 Template.botList.helpers({
   bots() {
-      return ['testing', 'testing anohter'];
+      return Bots.find({});
   },
 });
 
