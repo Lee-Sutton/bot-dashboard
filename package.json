@@ -2,12 +2,15 @@
   "name": "bot-dashboard",
   "private": true,
   "scripts": {
-    "cypress": "node_modules/.bin/cypress open",
+    "cypress": "node_modules/.bin/cypress run",
+    "cypress:open": "node_modules/.bin/cypress open",
     "start": "meteor run",
-    "test": "meteor test --driver-package meteortesting:mocha --port 4000"
+    "test": "meteor --once test --driver-package meteortesting:mocha --port 4000",
+    "test-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
+    "bcrypt": "^2.0.1",
     "meteor-node-stubs": "^0.3.2"
   },
   "devDependencies": {
