@@ -10,8 +10,8 @@ Template.botList.onCreated(function () {
 });
 
 Template.botList.helpers({
-  bots() {
+    bots() {
       return Bots.find({});
-  },
+    },
 });
 
