@@ -21,5 +21,14 @@ describe('Application dashboard test suite', function() {
         cy.get('#bot-description').should('have.value', '');
 
     });
+
+    it('Should display bots only for the user that created them', function() {
+        cy.login('lee@mailinator.com', 'password');
+        cy.get('#bot-name').type('Lee\'s Bot');
+        cy.get('#bot-description').type('New Bot Description');
+        cy.get('button').click();
+        cy.get('body').should('not.contain', 'New Bot');
+    });
+
 });
 
