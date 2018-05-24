@@ -1,17 +1,18 @@
 import { Bots } from '/imports/api/bots/bots.js';
 import { Meteor } from 'meteor/meteor';
-import { linkQuery } from "../../../api/links/links";
+import { getBots } from '/imports/api/bots/queries.js';
 import '/imports/ui/components/bot-list/bot-list.html';
 
 Template.botList.onCreated(function () {
-    Meteor.subscribe('links.all');
-    this.linkQuery = linkQuery.clone();
-    this.linkQuery.subscribe();
+    this.getBots = getBots.clone();
+    this.getBots.subscribe();
 });
 
 Template.botList.helpers({
     bots() {
-      return Bots.find({});
+        let foundBots = Template.instance().getBots.fetch();
+        console.log(foundBots);
+        return foundBots;
     },
 });
 
