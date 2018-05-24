@@ -16,6 +16,10 @@ describe('Application dashboard test suite', function() {
         // After clicking submit they see that the new bot is in the bot list
         cy.get('[data-cy=bot-list]').contains('New Bot').should('be.visible');
 
+        // The form is then cleared if the user wanted to enter new data
+        cy.get('#bot-name').should('have.value', '');
+        cy.get('#bot-description').should('have.value', '');
+
     });
 });
 
