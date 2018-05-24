@@ -8,5 +8,6 @@ Template.addBot.events({
             name = target['bot-name'].value,
             description = target['bot-description'].value;
         Meteor.call('bots.insert', name, description);
+        event.target.reset();
     },
 });
