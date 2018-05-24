@@ -4,15 +4,15 @@ import { getBots } from '/imports/api/bots/queries.js';
 import '/imports/ui/components/bot-list/bot-list.html';
 
 Template.botList.onCreated(function () {
+    Meteor.subscribe('bots.all');
     this.getBots = getBots.clone();
     this.getBots.subscribe();
 });
 
 Template.botList.helpers({
     bots() {
-        let foundBots = Template.instance().getBots.fetch();
-        console.log(foundBots);
-        return foundBots;
+        // getBots.fetch();
+        return Template.instance().getBots.fetch();
     },
 });
 
