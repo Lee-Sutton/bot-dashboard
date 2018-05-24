@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { check, Match } from 'meteor/check'
+import { check, Match } from 'meteor/check';
 import { Bots } from '/imports/api/bots/bots.js';
 
 Meteor.methods({

@@ -11,7 +11,6 @@ Template.botList.onCreated(function () {
 
 Template.botList.helpers({
     bots() {
-        // getBots.fetch();
         return Template.instance().getBots.fetch();
     },
 });

@@ -1,7 +1,3 @@
-// Tests for links methods
-//
-// https://guide.meteor.com/testing.html
-
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import { Bots } from './bots.js';
