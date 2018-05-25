@@ -1,10 +1,21 @@
 <template name="addBot">
-    <h3>Create a new bot</h3>
-    <form id="add-bot">
-        <label for="bot-name">Name</label>
-        <input type="text" value="" name="bot-name" id="bot-name"/>
-        <label for="bot-description">Description</label>
-        <input type="text" name="bot-description" id="bot-description" value="" />
-        <button>Submit</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <form id="add-bot">
+              <div class="row">
+                <div class="input-field col s5">
+                    <input type="text" class="validate" name="bot-name" id="bot-name"/>
+                    <label for="bot-name">Name</label>
+                </div>
+                <div class="input-field col s5">
+                    <input type="text" name="bot-description" id="bot-description" value="" />
+                    <label for="bot-description" class="validate">Description</label>
+                </div>
+                <div class="col s2">
+                    <button class="btn waves-effect waves-light">Add New</button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
 </template>

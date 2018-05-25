@@ -1,8 +1,27 @@
 <template name="botList">
-  <h2>Reddit Bots</h2>
-    <ul data-cy='bot-list'>
-        {{#each bots}}
-            <p>{{name}}</p>
-        {{/each}}
-    </ul>
+    <div class="container">
+        <table class="highlight" data-cy='bot-list'>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Number of runs</td>
+                    <td>Last Run</td>
+                    <td>Results</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each bots}}
+                    <tr>
+                        <td>
+                            <p>{{name}}</p>
+                            <p>{{description}}</p>
+                        </td>
+                        <td>10</td>
+                        <td>Jan 1 2020</td>
+                        <td>Yes</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </template>

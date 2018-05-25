@@ -25,7 +25,7 @@ describe('Application dashboard test suite', function() {
     it('Should display bots only for the user that created them', function() {
         cy.login('lee@mailinator.com', 'password');
         cy.get('#bot-name').type('Lee\'s Bot');
-        cy.get('#bot-description').type('New Bot Description');
+        cy.get('#bot-description').type('Lee\'s bot description');
         cy.get('button').click();
         cy.get('body').should('not.contain', 'New Bot');
     });

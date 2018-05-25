@@ -1,10 +1,9 @@
 <template name="App_body">
-    {{> loginButtons}}
+    {{> navbar}}
     {{#if currentUser}}
         {{> Template.dynamic template=bots}}
         {{> Template.dynamic template=addBot}}
     {{else}}
-        <h2>Reddit bots</h2>
         <p>Sign in to view bots</p>
     {{/if}}
 </template>
