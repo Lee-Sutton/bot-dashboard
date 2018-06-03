@@ -8,9 +8,14 @@ const checkAddBotModal = () => {
     return cy.get('.modal-title').contains('Add a bot').should('be.visible');
 };
 
+/**
+ * Fills in the addBotModal with the input information
+ */
 const fillAddBotModal = (name, description) => {
-    // They fill in the modal with the bot information
     cy.get('#bot-name').type(name);
+    cy.get('#bot-subreddit').type('hiphopheads');
+    cy.get('#bot-keyword').type('FRESH');
+    cy.get('#bot-score').type('100');
     cy.get('#bot-description').type(description);
     cy.get('[data-cy=add-bot-btn]').click();
 };
@@ -33,6 +38,9 @@ describe('Application dashboard test suite', function() {
 
         // After clicking submit they see that the new bot is in the bot list
         cy.get('[data-cy=bot-list]').contains('New Bot').should('be.visible');
+        cy.get('[data-cy=bot-list]').contains('hiphopheads').should('be.visible');
+        cy.get('[data-cy=bot-list]').contains('100').should('be.visible');
+        cy.get('[data-cy=bot-list]').contains('FRESH').should('be.visible');
 
     });
 
