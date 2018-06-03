@@ -9,6 +9,12 @@ describe('Application dashboard test suite', function() {
         // They haven't signed in but they notice a link
         cy.login();
 
+
+        // They want to add a new bot
+        cy.get('[data-cy=add-bot]').click();
+        cy.get('[data-cy=add-bot-modal]').should('be.visible');
+
+        // They fill in the modal with the bot information
         cy.get('#bot-name').type('New Bot');
         cy.get('#bot-description').type('New Bot Description');
         cy.get('button').click();

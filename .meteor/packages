@@ -26,6 +26,6 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 cultofcoders:grapher
 accounts-ui
 accounts-password
-materialize:materialize
 reywood:publish-composite
-useraccounts:materialize
+useraccounts:bootstrap
+twbs:bootstrap
