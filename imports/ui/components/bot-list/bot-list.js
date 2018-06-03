@@ -2,6 +2,7 @@ import { Bots } from '/imports/api/bots/bots.js';
 import { Meteor } from 'meteor/meteor';
 import { getBots } from '/imports/api/bots/queries.js';
 import '/imports/ui/components/bot-list/bot-list.html';
+import '/imports/ui/components/add-bot/add-bot.js';
 
 Template.botList.onCreated(function () {
     Meteor.subscribe('bots.all');
@@ -13,5 +14,12 @@ Template.botList.helpers({
     bots() {
         return Template.instance().getBots.fetch();
     },
+});
+
+Template.botList.events({
+    'click #add-bot': (event) => {
+        event.preventDefault();
+        Modal.show('addBot');
+    }
 });
 
