@@ -6,9 +6,9 @@
             <thead>
                 <tr>
                     <td>Name</td>
-                    <td>Number of runs</td>
-                    <td>Last Run</td>
-                    <td>Results</td>
+                    <td>Subreddit</td>
+                    <td>Keywords</td>
+                    <td>Min Score</td>
                 </tr>
             </thead>
             <tbody>
@@ -16,11 +16,11 @@
                     <tr>
                         <th scope="row">
                             <p>{{name}}</p>
-                            <p>{{description}}</p>
+                            <p><em>{{description}}</em></p>
                         </th>
-                        <td>10</td>
-                        <td>Jan 1 2020</td>
-                        <td>Yes</td>
+                        <td>{{subreddit}}</td>
+                        <td>{{keyword}}</td>
+                        <td>{{minimumScore}}</td>
                     </tr>
                 {{/each}}
             </tbody>

@@ -1,7 +1,7 @@
-import { getBots } from './queries.js';
-import { Bots } from './bots.js';
-import { expect } from 'chai';
-import { Meteor } from 'meteor/meteor';
+import {getBots} from './queries.js';
+import {Bots} from './bots.js';
+import {expect} from 'chai';
+import {Meteor} from 'meteor/meteor';
 
 if (Meteor.isServer) {
     describe('bot queries test suite', function() {
@@ -9,13 +9,23 @@ if (Meteor.isServer) {
             Bots.remove({});
         });
         it('queries for bots', function() {
-            let botId = Bots.insert({name: 'testName', description: 'Dummy description'}),
+            const dummyBot = {
+                name: 'testName',
+                description: 'Dummy description',
+                minimumScore: 100,
+                subreddit: 'testing',
+                keyword: 'keyword'
+            };
+            let botId = Bots.insert(dummyBot),
                 bots = getBots.fetch({_id: botId});
             expect(bots).to.not.be.undefined;
             expect(bots).to.have.lengthOf(1);
-            expect(bots[0]).to.have.property('name', 'testName');
-        });
 
+            let bot = bots[0];
+
+            for (key in dummyBot) {
+                expect(bot[key]).to.equal(dummyBot[key]);
+            }
+        });
     });
 }
-
