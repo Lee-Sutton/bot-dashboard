@@ -5,6 +5,7 @@
         <table class="table table-hover" data-cy="bot-list">
             <thead>
                 <tr>
+                    <td></td>
                     <td>Name</td>
                     <td>Subreddit</td>
                     <td>Keywords</td>
@@ -15,9 +16,11 @@
                 {{#each bots}}
                     <tr>
                         <th scope="row">
-                            <p>{{name}}</p>
-                            <p><em>{{description}}</em></p>
                         </th>
+                        <td>
+                            <a href="{{pathFor 'botResults'}}"><b>{{name}}</b></a>
+                            <p><em>{{description}}</em></p>
+                        </td>
                         <td>{{subreddit}}</td>
                         <td>{{keyword}}</td>
                         <td>{{minimumScore}}</td>

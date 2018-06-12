@@ -14,6 +14,9 @@ Template.botList.helpers({
     bots() {
         return Template.instance().getBots.fetch();
     },
+    pathFor(pathName) {
+        return FlowRouter.path(pathName);
+    }
 });
 
 Template.botList.events({

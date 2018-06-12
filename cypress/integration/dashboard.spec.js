@@ -1,6 +1,5 @@
 /**
  * Checks the add bot modal contains the correct information/structure
- *
  * @returns {cy.chain}
  */
 const checkAddBotModal = () => {
@@ -41,6 +40,13 @@ describe('Application dashboard test suite', function() {
         cy.get('[data-cy=bot-list]').contains('hiphopheads').should('be.visible');
         cy.get('[data-cy=bot-list]').contains('100').should('be.visible');
         cy.get('[data-cy=bot-list]').contains('FRESH').should('be.visible');
+
+        // The user clicks the listed bot
+        cy.get('.table').contains('New Bot').click();
+
+        // This opens a new page where the user can run the bot
+        cy.url().should('contain', 'results');
+        cy.contains('Run').should('be.visible');
 
     });
 

@@ -15,6 +15,13 @@ FlowRouter.route('/', {
     }
 });
 
+FlowRouter.route('/results/:botId', {
+    name: 'botResults',
+    action: () => {
+        BlazeLayout.render('App_body');
+    }
+});
+
 FlowRouter.notFound = {
   action() {
     BlazeLayout.render('App_body', { main: 'App_notFound' });
