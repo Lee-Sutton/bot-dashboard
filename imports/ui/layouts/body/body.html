@@ -1,7 +1,7 @@
 <template name="App_body">
     {{> navbar}}
     {{#if currentUser}}
-        {{> Template.dynamic template=bots}}
+        {{> Template.dynamic template=body}}
     {{else}}
         <p>Sign in to view bots</p>
     {{/if}}
