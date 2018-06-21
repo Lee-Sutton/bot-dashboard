@@ -14,8 +14,9 @@ Template.botList.helpers({
     bots() {
         return Template.instance().getBots.fetch();
     },
-    pathFor(pathName) {
-        return FlowRouter.path(pathName);
+    botResults(bot) {
+        let path = FlowRouter.path('botResults', {botId: this._id});
+        return path;
     }
 });
 

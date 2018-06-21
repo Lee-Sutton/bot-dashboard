@@ -1,0 +1,34 @@
+<template name="botResults">
+    <div class="container">
+        <button id="run-bot" class="btn btn-primary">Run Bot</button>
+        <table class="table table-hover" data-cy="bot-list">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Date</td>
+                    <td>Results</td>
+                    <td>Score</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results}}
+                    <tr>
+                        <th scope="row">
+                        </th>
+                        <td>{{date}}</td>
+                        <td>{{result}}</td>
+                        <td>{{score}}</td>
+                    </tr>
+                {{else}}
+                    <tr>
+                        <th scope="row">
+                        </th>
+                        <td>No data available</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
