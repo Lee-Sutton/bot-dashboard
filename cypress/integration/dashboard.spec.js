@@ -46,7 +46,12 @@ describe('Application dashboard test suite', function() {
 
         // This opens a new page where the user can run the bot
         cy.url().should('contain', 'results');
-        cy.contains('Run').should('be.visible');
+        cy.contains('Date').should('be.visible');
+        cy.contains('Results').should('be.visible');
+        cy.contains('No data available').should('be.visible');
+        cy.get('#run-bot').should('be.visible');
+        cy.get('[data-cy=loading-icon]').should('be.visible');
+        cy.get('[data-cy=results-table]').should('be.visible');
 
     });
 
