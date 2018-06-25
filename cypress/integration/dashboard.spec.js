@@ -49,9 +49,10 @@ describe('Application dashboard test suite', function() {
         cy.contains('Date').should('be.visible');
         cy.contains('Results').should('be.visible');
         cy.contains('No data available').should('be.visible');
-        cy.get('#run-bot').should('be.visible');
-        cy.get('[data-cy=loading-icon]').should('be.visible');
-        cy.get('[data-cy=results-table]').should('be.visible');
+        cy.get('#run-bot').click();
+
+        // Mock out meteor method here and make sure it's called
+        // or return values from the method?
 
     });
 

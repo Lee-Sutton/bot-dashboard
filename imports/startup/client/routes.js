@@ -19,7 +19,6 @@ FlowRouter.route('/', {
 FlowRouter.route('/results/:botId', {
     name: 'botResults',
     action: () => {
-        console.log('This is rendered');
         BlazeLayout.render('App_body', {body: 'botResults'});
     }
 });
