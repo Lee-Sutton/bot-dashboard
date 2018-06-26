@@ -3,10 +3,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import './bot-results.html';
 
 Template.botResults.events({
-    runBot: function () {
-        console.log('is this running?');
-        let botId = FlowRouter.getParams('botId');
-        console.log(botId);
-        // Meteor.call('')
+    'click #run-bot': function () {
+        let botId = FlowRouter.getParam('botId');
+        Meteor.call('runBot', botId);
     }
 });
