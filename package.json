@@ -5,8 +5,9 @@
     "cypress": "node_modules/.bin/cypress run",
     "cypress:open": "node_modules/.bin/cypress open",
     "start": "meteor run",
-    "test": "meteor --once test --driver-package meteortesting:mocha --port 4000",
-    "test-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000"
+    "test": "BABEL_ENV=testing mocha ./tests --compilers js:babel-register",
+    "mtest": "meteor --once test --driver-package meteortesting:mocha --port 4000",
+    "mtest-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
@@ -16,8 +17,11 @@
     "snoowrap": "^1.15.2"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "cypress": "^3.0.1",
+    "mocha": "^5.2.0",
     "testdouble": "^3.8.1"
   }
 }
