@@ -1,32 +1,21 @@
-
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
 
 Meteor.startup(() => {
-  // if the users collection is empty
-  if (Meteor.users.find().count() === 0) {
-    const data = [
-      {
-        title: 'Do the Tutorial',
-        url: 'https://www.meteor.com/try',
-        createdAt: new Date(),
-      },
-      {
-        title: 'Follow the Guide',
-        url: 'http://guide.meteor.com',
-        createdAt: new Date(),
-      },
-      {
-        title: 'Read the Docs',
-        url: 'https://docs.meteor.com',
-        createdAt: new Date(),
-      },
-      {
-        title: 'Discussions',
-        url: 'https://forums.meteor.com',
-        createdAt: new Date(),
-      },
-    ];
-
-    data.forEach(link => Links.insert(link));
-  }
+    // if the users collection is empty
+    if (Meteor.users.find().count() === 0) {
+        const data = [
+            {
+                email: 'john@mailinator.com',
+                password: 'password',
+            },
+            {
+                email: 'lee@mailinator.com',
+                password: 'password',
+            },
+        ];
+        data.forEach((user) => {
+            Accounts.createUser(user);
+        });
+    }
 });
