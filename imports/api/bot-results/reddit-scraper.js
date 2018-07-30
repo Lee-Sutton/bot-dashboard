@@ -9,19 +9,19 @@ const DEFAULT_SNOO = new snoowrap({
 });
 
 export class RedditScraper {
-    constructor({snoo = DEFAULT_SNOO, minimumScore, keyword, subreddit}) {
+    constructor(snoo = DEFAULT_SNOO) {
         this.snoo = snoo;
-        this.minimumScore = minimumScore;
-        this.subreddit = subreddit;
-        this.keyword = keyword;
     }
-    run(callback) {
-        this.snoo
-            .getSubreddit('hiphopheads')
+    run(subreddit, callback) {
+        return this.snoo
+            .getSubreddit(subreddit)
             .getHot()
             .map((post) => {
-                return post.score;
-            })
-            .then(callback);
+                return {
+                    title: post.title,
+                    score: post.score,
+                    url: post.url
+                };
+            }).then(callback);
     }
 }
