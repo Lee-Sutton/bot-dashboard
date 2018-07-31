@@ -13,7 +13,7 @@ export class RedditScraper {
         this.snoo = snoo;
     }
     run(subreddit, callback) {
-        return this.snoo
+        this.snoo
             .getSubreddit(subreddit)
             .getHot()
             .map((post) => {

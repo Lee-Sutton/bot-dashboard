@@ -6,8 +6,9 @@
                 <tr>
                     <td></td>
                     <td>Date</td>
-                    <td>Results</td>
+                    <td>Title</td>
                     <td>Score</td>
+                    <td>url</td>
                 </tr>
             </thead>
             <tbody>
@@ -15,15 +16,17 @@
                     <tr>
                         <th scope="row">
                         </th>
-                        <td>{{date}}</td>
-                        <td>{{result}}</td>
+                        <td>{{moment date}}</td>
+                        <td>{{title}}</td>
                         <td>{{score}}</td>
+                        <td><a href="{{url}}" target="_blank">{{url}}</a></td>
                     </tr>
                 {{else}}
                     <tr>
                         <th scope="row">
                         </th>
                         <td><em>No data available</em></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>

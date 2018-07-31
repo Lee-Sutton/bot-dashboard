@@ -13,6 +13,7 @@
     "@babel/runtime": "^7.0.0-beta.42",
     "bcrypt": "^2.0.1",
     "meteor-node-stubs": "^0.3.2",
+    "moment": "^2.22.2",
     "snoostorm": "0.0.5",
     "snoowrap": "^1.15.2"
   },

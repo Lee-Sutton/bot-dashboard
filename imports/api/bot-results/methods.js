@@ -4,18 +4,22 @@ import {BotResults} from './bot-results.js';
 import {Bots} from '../bots/bots.js';
 
 export const scrapeReddit = (bot, scraper = new RedditScraper()) => {
-    scraper.run(bot.subreddit, (posts) => {
+
+    const postProcessor = Meteor.bindEnvironment((posts) => {
         posts.forEach((post) => {
-            if (post.title.toLowerCase.contains(bot.keyword) && post.score > bot.minimumScore) {
+            if (post.title && post.title.includes(bot.keyword) && post.score > bot.minimumScore) {
                 BotResults.insert({
+                    botId: bot._id,
                     title: post.title,
                     score: post.score,
                     url: post.url,
-                    createdAt: new Date(),
+                    date: new Date(),
                 });
             }
         });
     });
+
+    scraper.run(bot.subreddit, postProcessor);
 };
 
 Meteor.methods({

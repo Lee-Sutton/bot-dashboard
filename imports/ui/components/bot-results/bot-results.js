@@ -1,10 +1,24 @@
 import {Meteor} from 'meteor/meteor';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+import {BotResults} from '/imports/api/bot-results/bot-results.js';
+import {FlowRouter} from 'meteor/kadira:flow-router';
 import './bot-results.html';
+import moment from 'moment';
+
+Template.botResults.onCreated(function () {
+    Meteor.subscribe('botResults', FlowRouter.getParam('botId'));
+});
 
 Template.botResults.events({
     'click #run-bot': function () {
         let botId = FlowRouter.getParam('botId');
         Meteor.call('runBot', botId);
     }
+});
+
+Template.botResults.helpers({
+    results: () => {
+        const results = BotResults.find({botId: FlowRouter.getParam('botId')});
+        return results;
+    },
+    moment: (date) => moment(date).format("MMM Do YY").toString(),
 });
