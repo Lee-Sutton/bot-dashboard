@@ -1,6 +1,6 @@
 {
     "env" : {
-        "testing": {
+        "test": {
             "presets": ["env"],
             "plugins": [["babel-plugin-root-import", { "rootPathPrefix": "/"}]]
         }

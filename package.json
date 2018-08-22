@@ -5,13 +5,14 @@
     "cypress": "node_modules/.bin/cypress run",
     "cypress:open": "node_modules/.bin/cypress open",
     "start": "meteor run",
-    "mocha": "BABEL_ENV=testing mocha ./tests --compilers js:babel-register",
-    "test-once": "meteor --once test --driver-package meteortesting:mocha --port 4000",
-    "test": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000"
+    "test:unit": "jest --config tests/unit-test-setup/jest-config.js",
+    "test:integration-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000",
+    "test:integration": "meteor test --once --driver-package meteortesting:mocha --port 4000"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
     "bcrypt": "^2.0.1",
+    "jest": "^23.5.0",
     "meteor-node-stubs": "^0.3.2",
     "moment": "^2.22.2",
     "snoostorm": "0.0.5",
@@ -20,7 +21,6 @@
   "devDependencies": {
     "babel-plugin-root-import": "^6.1.0",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-meteor": "^7.0.0-beta.51",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "cypress": "^3.0.1",
