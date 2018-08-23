@@ -4,7 +4,8 @@
         <!--<modals-container></modals-container>-->
         <!--<addBot></addBot>-->
         <div class="container">
-            <button id="add-bot" @click="showAddBotModal" class="btn btn-primary">Add Bot</button>
+            <router-link class="btn btn-primary" to="/add">Add Bot</router-link>
+            <!--<a class="btn btn-primary" href="/add">Add Bot</a>-->
             <br>
             <table class="table table-hover" data-cy="bot-list">
                 <thead>
@@ -37,7 +38,7 @@
 <script>
     import {Bots} from "/imports/api/bots/bots.js";
     import navbar from "/imports/ui/components/navbar/navbar.vue";
-    import addBotModal from "/imports/ui/components/add-bot/addBot.vue";
+    import addBotModal from "/imports/ui/components/add-bot/AddBot.vue";
 
     export default {
         components: {
