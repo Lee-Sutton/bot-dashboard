@@ -25,7 +25,7 @@ describe('Application dashboard test suite', function() {
     });
     it('Should greet the user with a dashboard', function() {
         // The user visits bots dashboard page
-        // cy.get('body').contains('Sign in to view bots').should('be.visible');
+        cy.get('body').contains('Sign in or create an account to get started').should('be.visible');
 
         // They haven't signed in but they notice a link
         cy.login();
@@ -34,7 +34,7 @@ describe('Application dashboard test suite', function() {
         cy.contains('Add Bot').click();
 
         // The user is directed to an add bot url
-        cy.url().contains('add');
+        cy.url().should('contain', 'add');
         fillAddBotModal('New Bot', 'New Bot Description');
 
         // After clicking submit they see that the new bot is in the bot list

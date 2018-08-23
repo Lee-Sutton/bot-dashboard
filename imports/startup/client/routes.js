@@ -1,7 +1,7 @@
 
 // Import the router
 import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2'
-import App from '/imports/ui/App';
+import App from '/imports/ui/components/bot-list/BotList';
 import AddBot from '/imports/ui/components/add-bot/AddBot';
 
 // Create router instance

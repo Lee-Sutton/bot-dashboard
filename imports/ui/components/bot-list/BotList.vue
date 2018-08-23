@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <div class="container">
+        <div v-if="loggedIn" class="container">
             <router-link class="btn btn-primary" to="/add">Add Bot</router-link>
             <br>
             <table class="table table-hover" data-cy="bot-list">
@@ -27,13 +27,20 @@
                 </tbody>
             </table>
         </div>
+        <div v-else>
+            <welcome></welcome>
+        </div>
     </div>
 </template>
 
 <script>
     import {Bots} from "/imports/api/bots/bots.js";
+    import Welcome from '/imports/ui/components/welcome/Welcome'
 
     export default {
+        components: {
+            Welcome
+        },
         meteor: {
             $subscribe: {
                 'bots.all': []
@@ -41,8 +48,12 @@
             bots() {
                 let bots = Bots.find({});
                 return bots;
+            },
+            loggedIn() {
+                console.log(Meteor.user());
+                return !!Meteor.user();
             }
-        }
+        },
     }
 </script>
 
