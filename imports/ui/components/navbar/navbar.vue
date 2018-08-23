@@ -13,7 +13,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left">
+                <form v-if="loggedIn" class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
@@ -22,14 +22,21 @@
                 <ul class="nav navbar-nav">
                     <li class="navbar-text" data-cy=""><blaze-template template="loginButtons" align="left"></blaze-template></li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </nav>
 </template>
 
 <script>
+    import {Meteor} from 'meteor/meteor';
+
     export default {
-        name: "navbar"
+        name: "navbar",
+        meteor: {
+            loggedIn() {
+                return !!Meteor.user();
+            }
+        }
     }
 </script>
 
