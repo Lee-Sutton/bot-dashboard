@@ -22,10 +22,10 @@ module.exports = {
     'vue'
   ],
   // "reporters": [ "default", "jest-junit" ],
-  // 'transform': {
-  //   '^.+\\.js$': 'babel-jest',
-  //   '.*\\.(vue)$': 'jest-vue-preprocessor'
-  // },
+  'transform': {
+    '^.+\\.js$': 'babel-jest',
+    '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest',
+  },
   'moduleNameMapper': {
     '^meteor/(.*)': '<rootDir>/tests/unit-test-setup/meteor-mocks/$1.js',
     '^[/](.*)': '<rootDir>/$1'
