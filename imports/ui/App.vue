@@ -1,11 +1,7 @@
 <template>
     <div class="app">
-        <navbar></navbar>
-        <!--<modals-container></modals-container>-->
-        <!--<addBot></addBot>-->
         <div class="container">
-            <!--<router-link class="btn btn-primary" to="/add">Add Bot</router-link>-->
-            <a class="btn btn-primary" href="/add">Add Bot</a>
+            <router-link class="btn btn-primary" to="/add">Add Bot</router-link>
             <br>
             <table class="table table-hover" data-cy="bot-list">
                 <thead>
@@ -37,19 +33,8 @@
 
 <script>
     import {Bots} from "/imports/api/bots/bots.js";
-    import navbar from "/imports/ui/components/navbar/navbar.vue";
-    import addBotModal from "/imports/ui/components/add-bot/AddBot.vue";
 
     export default {
-        components: {
-            navbar,
-            addBotModal,
-        },
-        methods: {
-            showAddBotModal() {
-                this.$refs.addBotModal.open()
-            }
-        },
         meteor: {
             $subscribe: {
                 'bots.all': []

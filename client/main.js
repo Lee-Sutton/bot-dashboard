@@ -1,8 +1,10 @@
 // Libs
 import { Meteor } from 'meteor/meteor';
 import Vue from 'vue';
+import AppLayout from '/imports/ui/AppLayout';
 import {store} from '/imports/startup/client/store.js';
 import { Accounts } from 'meteor/accounts-base'
+import {routerFactory} from '/imports/startup/client/routes';
 
 Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL',
@@ -11,8 +13,8 @@ Accounts.ui.config({
 import VModal from 'vue-js-modal';
 Vue.use(VModal, { dialog: true });
 
-import Vuex from 'vuex'
-Vue.use(Vuex);
+// import Vuex from 'vuex'
+// Vue.use(Vuex);
 
 import VueTracker from 'vue-meteor-tracker';
 Vue.use(VueTracker);
@@ -20,22 +22,12 @@ Vue.use(VueTracker);
 import VueMeta from 'vue-meta';
 Vue.use(VueMeta);
 
-// Main app
-import {routes} from '/imports/startup/client/routes'
+const router = routerFactory.create();
 
 Meteor.startup(() => {
     new Vue({
         store,
-        data: {
-            currentRoute: window.location.pathname
-        },
-        render(h) {
-          return h(this.ViewComponent);
-        },
-        computed: {
-            ViewComponent() {
-                return routes[this.currentRoute];
-            }
-        }
+        router,
+        render: h => h(AppLayout),
     }).$mount('app');
 });
