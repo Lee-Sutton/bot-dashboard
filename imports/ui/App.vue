@@ -18,7 +18,6 @@
                     <th scope="row">
                     </th>
                     <td>
-                        <!--<a href="{{botResults this}}"><b>{{name}}</b></a>-->
                         <p><em>{{bot.name}}</em></p>
                     </td>
                     <td>{{bot.subreddit}}</td>

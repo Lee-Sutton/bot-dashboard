@@ -19,8 +19,8 @@
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="navbar-text" data-cy=""><blaze-template template="loginButtons"></blaze-template></li>
+                <ul class="nav navbar-nav">
+                    <li class="navbar-text" data-cy=""><blaze-template template="loginButtons" align="left"></blaze-template></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

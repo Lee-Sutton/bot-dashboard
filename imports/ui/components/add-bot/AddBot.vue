@@ -57,8 +57,13 @@
                         minimumScore: target['bot-score'].value,
                         description: target['bot-description'].value
                     };
-                Meteor.call('bots.insert', bot);
-                this.$modal.hide(this);
+                Meteor.call('bots.insert', bot, (err, result) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    this.$router.push('/');
+
+                });
             }
         },
     }
