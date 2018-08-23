@@ -7,6 +7,10 @@ Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL',
 });
 
+
+import Vuex from 'vuex'
+Vue.use(Vuex);
+
 import VueTracker from 'vue-meteor-tracker';
 Vue.use(VueTracker);
 
