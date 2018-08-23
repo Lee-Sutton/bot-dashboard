@@ -1,10 +1,13 @@
-// import {StoreModule} from 'meteor/akryum:vuex'
-//
-// const root = new StoreModule();
-//
-// root.addState({
-//     name: 'hello world'
-// });
-//
-// export const store = root.exportStore();
 
+import Vuex from 'vuex';
+
+export const store = new Vuex.Store({
+    state: {
+        count: 0
+    },
+    mutations: {
+        increment (state) {
+            state.count++
+        }
+    }
+});
