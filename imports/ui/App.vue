@@ -46,7 +46,7 @@
         },
         methods: {
             showAddBotModal() {
-                this.$modal.show(addBotModal);
+                this.$refs.addBotModal.open()
             }
         },
         meteor: {

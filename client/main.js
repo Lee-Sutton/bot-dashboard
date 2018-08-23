@@ -13,18 +13,21 @@ Vue.use(VueTracker);
 import VueMeta from 'vue-meta';
 Vue.use(VueMeta);
 
-import VModal from 'vue-js-modal'
-// Vue.use(VModal);
-Vue.use(VModal, {
-    dynamic: true,
-    injectModalsContainer: true
-});
-
 // Main app
-import App from '/imports/ui/App.vue';
+import {routes} from '/imports/startup/client/routes'
 
 Meteor.startup(() => {
     new Vue({
-        render: h => h(App),
+        data: {
+            currentRoute: window.location.pathname
+        },
+        render(h) {
+          return h(this.ViewComponent);
+        },
+        computed: {
+            ViewComponent() {
+                return routes[this.currentRoute];
+            }
+        }
     }).$mount('app');
 });
