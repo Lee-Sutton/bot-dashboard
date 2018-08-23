@@ -4,8 +4,8 @@
         <!--<modals-container></modals-container>-->
         <!--<addBot></addBot>-->
         <div class="container">
-            <router-link class="btn btn-primary" to="/add">Add Bot</router-link>
-            <!--<a class="btn btn-primary" href="/add">Add Bot</a>-->
+            <!--<router-link class="btn btn-primary" to="/add">Add Bot</router-link>-->
+            <a class="btn btn-primary" href="/add">Add Bot</a>
             <br>
             <table class="table table-hover" data-cy="bot-list">
                 <thead>

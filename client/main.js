@@ -26,7 +26,6 @@ import {routes} from '/imports/startup/client/routes'
 Meteor.startup(() => {
     new Vue({
         store,
-        // modal: Vmodal,
         data: {
             currentRoute: window.location.pathname
         },
