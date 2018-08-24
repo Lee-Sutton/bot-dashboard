@@ -12,9 +12,8 @@ module.exports = {
   ],
   'testURL': 'http://www.meteor-vue-app.com',
   'testMatch': ['<rootDir>/imports/**/*.spec.js', '<rootDir>/tests/**/*.spec.js'],
-  // 'setupFiles': ['<rootDir>/tests/unit-test-setup/setup-tests.js'],
+  'setupFiles': ['<rootDir>/tests/unit-test-setup/setup-tests.js'],
   'verbose': true,
-  'collectCoverage': false,
   'collectCoverageFrom': ['imports/**/*', '!src/**/*-fixture.js'],
   'coverageDirectory': '<rootDir>/tests/coverage/unit-tests/',
   'moduleFileExtensions': [

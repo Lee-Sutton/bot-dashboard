@@ -43,10 +43,6 @@
 <script>
     export default {
         name: "addBot",
-        created () {
-            console.log('this was created');
-            // this.modalWidth = 1000;
-        },
         methods: {
             submitBot(event) {
                 let target = event.target,

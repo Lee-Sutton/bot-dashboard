@@ -1,7 +1,7 @@
 <template>
     <div class="app">
         <div v-if="loggedIn" class="container">
-            <router-link class="btn btn-primary" to="/add">Add Bot</router-link>
+            <router-link class="btn btn-primary" to="/add" data-cy="add-bot">Add Bot</router-link>
             <br>
             <table class="table table-hover" data-cy="bot-list">
                 <thead>
@@ -18,7 +18,7 @@
                     <th scope="row">
                     </th>
                     <td>
-                        <p><em>{{bot.name}}</em></p>
+                        <router-link :to="{name: 'results', params: {id: bot._id}}">{{bot.name}}</router-link>
                     </td>
                     <td>{{bot.subreddit}}</td>
                     <td>{{bot.keyword}}</td>
@@ -40,6 +40,11 @@
     export default {
         components: {
             Welcome
+        },
+        methods: {
+            botResults(id) {
+                this.$router.push(`/results/${id}`);
+            }
         },
         meteor: {
             $subscribe: {

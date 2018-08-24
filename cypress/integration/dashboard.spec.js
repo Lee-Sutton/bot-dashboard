@@ -31,7 +31,7 @@ describe('Application dashboard test suite', function() {
         cy.login();
 
         // They want to add a new bot
-        cy.contains('Add Bot').click();
+        cy.get('[data-cy=add-bot]').click({force: true});
 
         // The user is directed to an add bot url
         cy.url().should('contain', 'add');
@@ -63,11 +63,5 @@ describe('Application dashboard test suite', function() {
             expect(win.Meteor.call).to.have.been.calledWith('runBot');
         });
     });
-
-    it('Should display bots only for the user that created them', function() {
-        cy.login('lee@mailinator.com', 'password');
-        cy.get('body').should('not.contain', 'New Bot');
-    });
-
 });
 

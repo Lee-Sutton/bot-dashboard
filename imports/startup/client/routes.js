@@ -3,6 +3,7 @@
 import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2'
 import App from '/imports/ui/components/bot-list/BotList';
 import AddBot from '/imports/ui/components/add-bot/AddBot';
+import BotResults from '/imports/ui/components/bot-results/BotResults';
 
 // Create router instance
 export const routerFactory = new RouterFactory({
@@ -33,5 +34,11 @@ RouterFactory.configure(factory => {
             name: 'add',
             component: AddBot,
         },
+        {
+            path: '/results/:id',
+            name: 'results',
+            component: BotResults,
+            props: true
+        }
     ])
 });
