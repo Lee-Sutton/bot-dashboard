@@ -16,6 +16,9 @@ describe('#AddBot component spec', () => {
         wrapper.vm.$router = {
             push: jest.fn()
         };
+        wrapper.vm.$notify = {
+
+        }
 
         // The user fills in the inputs
         wrapper.find('#bot-name').setValue(botName);

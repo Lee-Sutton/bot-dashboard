@@ -65,8 +65,19 @@
                     };
                 Meteor.call('bots.insert', bot, (err) => {
                     if (err) {
-                        console.log(err)
+                        this.$notify({
+                            group: 'foo',
+                            type: 'Danger',
+                            title: 'Error adding bot',
+                            text: err,
+                        });
                     }
+                    this.$notify({
+                        group: 'foo',
+                        title: 'Bot Added',
+                        type: 'success',
+                        text: 'Bot added successfully',
+                    });
                     this.$router.push('/');
                 });
             }

@@ -10,6 +10,9 @@ Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL',
 });
 
+import Notifications from 'vue-notification';
+Vue.use(Notifications);
+
 import VueTracker from 'vue-meteor-tracker';
 Vue.use(VueTracker);
 
