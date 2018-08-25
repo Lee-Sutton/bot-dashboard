@@ -25,12 +25,8 @@ cultofcoders:grapher
 accounts-ui@1.3.0
 accounts-password@1.5.1
 reywood:publish-composite
-twbs:bootstrap
-peppelg:bootstrap-3-modal
 static-html
-akryum:vue
-akryum:vue-component
 session@1.1.7
 underscore
 vuejs:blaze-integration
-akryum:vue-router2
+akryum:vue-component
