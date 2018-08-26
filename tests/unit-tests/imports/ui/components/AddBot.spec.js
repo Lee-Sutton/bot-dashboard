@@ -16,9 +16,7 @@ describe('#AddBot component spec', () => {
         wrapper.vm.$router = {
             push: jest.fn()
         };
-        wrapper.vm.$notify = {
-
-        }
+        wrapper.vm.$notify = jest.fn();
 
         // The user fills in the inputs
         wrapper.find('#bot-name').setValue(botName);
@@ -38,10 +36,19 @@ describe('#AddBot component spec', () => {
         expect(inputBot.name).toBe(botName);
     });
 
-    it('should redirect the user back to the home page', function () {
+    it('should redirect the user back to the home page', () => {
         wrapper.find('form').trigger('submit');
         let callback = Meteor.call.mock.calls[0][2];
         callback();
         expect(wrapper.vm.$router.push.mock.calls[0][0]).toContain('/');
+    });
+
+    it('should notify the user if an error occured', () => {
+        wrapper.find('form').trigger('submit');
+        let callback = Meteor.call.mock.calls[0][2],
+            error = {};
+
+        callback(error);
+        expect(wrapper.vm.$notify.mock.calls).toHaveLength(1);
     });
 });

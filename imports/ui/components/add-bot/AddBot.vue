@@ -71,13 +71,15 @@
                             title: 'Error adding bot',
                             text: err,
                         });
+                    } else {
+                        this.$notify({
+                            group: 'foo',
+                            title: 'Bot Added',
+                            type: 'success',
+                            text: 'Bot added successfully',
+                        });
                     }
-                    this.$notify({
-                        group: 'foo',
-                        title: 'Bot Added',
-                        type: 'success',
-                        text: 'Bot added successfully',
-                    });
+
                     this.$router.push('/');
                 });
             }
