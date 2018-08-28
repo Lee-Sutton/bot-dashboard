@@ -30,12 +30,12 @@
 
 <script>
     import {Meteor} from 'meteor/meteor';
-    import Modal from '/imports/ui/components/modal/Modal';
+    import SignInModal from '/imports/ui/components/sign-in-modal/SignInModal';
 
     export default {
         name: "navbar",
         components: {
-            Modal
+            SignInModal
         },
         methods: {
             openModal () {

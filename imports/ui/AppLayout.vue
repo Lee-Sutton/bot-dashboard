@@ -3,18 +3,18 @@
         <navbar></navbar>
         <router-view></router-view>
         <notifications group="notifcations" />
-        <modal v-if="modalDisplayed"></modal>
+        <sign-in-modal v-if="modalDisplayed"></sign-in-modal>
     </div>
 </template>
 
 <script>
     import navbar from "/imports/ui/components/navbar/navbar.vue";
-    import Modal from '/imports/ui/components/modal/Modal';
+    import SignInModal from '/imports/ui/components/sign-in-modal/SignInModal';
     export default {
         name: "AppLayout",
         components: {
             navbar,
-            Modal
+            SignInModal
         },
         computed: {
             modalDisplayed () {
