@@ -18,20 +18,36 @@
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
+                    <button class="btn btn-default" @click="openModal">Modal test</button>
                 </form>
                 <ul class="nav navbar-nav">
                     <li class="navbar-text" data-cy=""><blaze-template template="loginButtons" align="left"></blaze-template></li>
                 </ul>
             </div>
         </div>
+        <modal v-if="showModal"></modal>
     </nav>
 </template>
 
 <script>
     import {Meteor} from 'meteor/meteor';
+    import Modal from '/imports/ui/components/modal/Modal';
 
     export default {
         name: "navbar",
+        data() {
+            return {
+                showModal: false
+            };
+        },
+        components: {
+            Modal
+        },
+        methods: {
+            openModal () {
+                this.showModal = true;
+            }
+        },
         meteor: {
             loggedIn() {
                 return !!Meteor.user();

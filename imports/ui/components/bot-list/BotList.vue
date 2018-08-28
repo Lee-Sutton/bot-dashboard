@@ -19,6 +19,8 @@
                     </th>
                     <td>
                         <router-link :to="{name: 'results', params: {id: bot._id}}">{{bot.name}}</router-link>
+                        <br>
+                        <em>{{bot.results().count()}} hits</em>
                     </td>
                     <td>{{bot.subreddit}}</td>
                     <td>{{bot.keyword}}</td>
@@ -48,7 +50,8 @@
         },
         meteor: {
             $subscribe: {
-                'bots.all': []
+                'bots.all': [],
+                'botResults.all': []
             },
             bots() {
                 let bots = Bots.find({});
