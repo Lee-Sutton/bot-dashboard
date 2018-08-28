@@ -25,7 +25,6 @@
                 </ul>
             </div>
         </div>
-        <modal v-if="showModal"></modal>
     </nav>
 </template>
 
@@ -35,17 +34,12 @@
 
     export default {
         name: "navbar",
-        data() {
-            return {
-                showModal: false
-            };
-        },
         components: {
             Modal
         },
         methods: {
             openModal () {
-                this.showModal = true;
+                this.$store.commit('showModal');
             }
         },
         meteor: {

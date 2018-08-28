@@ -39,7 +39,6 @@
         name: "BotResults",
         props: ['id'],
         created () {
-            console.log(this.$meteor);
             this.$subscribe('botResults', this.id);
         },
         methods: {

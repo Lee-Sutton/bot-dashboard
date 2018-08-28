@@ -6,11 +6,14 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        count: 0
+        modalDisplayed: false
     },
     mutations: {
-        increment (state) {
-            state.count++
+        showModal (state) {
+            state.modalDisplayed = true;
+        },
+        hideModal (state) {
+            state.modalDisplayed = false;
         }
     }
 });

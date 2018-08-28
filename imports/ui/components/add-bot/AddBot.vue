@@ -66,14 +66,14 @@
                 Meteor.call('bots.insert', bot, (err) => {
                     if (err) {
                         this.$notify({
-                            group: 'foo',
+                            group: 'notification',
                             type: 'Danger',
                             title: 'Error adding bot',
                             text: err,
                         });
                     } else {
                         this.$notify({
-                            group: 'foo',
+                            group: 'notification',
                             title: 'Bot Added',
                             type: 'success',
                             text: 'Bot added successfully',

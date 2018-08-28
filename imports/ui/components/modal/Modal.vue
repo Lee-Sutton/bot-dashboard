@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <slot name="modal-footer"></slot>
+                        <button @click="close" class="btn btn-default">Close</button>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,12 @@
 </template>
 <script>
     export default {
-        name: "Modal"
+        name: "Modal",
+        methods: {
+            close () {
+                this.$store.commit('hideModal');
+            }
+        }
     }
 </script>
 

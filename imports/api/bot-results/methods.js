@@ -7,7 +7,6 @@ export const scrapeReddit = (bot, scraper = new RedditScraper()) => {
 
     const postProcessor = Meteor.bindEnvironment((posts) => {
         posts.forEach((post) => {
-            console.log(post);
             if (post.title && post.title.toLowerCase().includes(bot.keyword) && post.score > bot.minimumScore) {
                 BotResults.insert({
                     botId: bot._id,

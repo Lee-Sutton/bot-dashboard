@@ -58,7 +58,6 @@
                 return bots;
             },
             loggedIn() {
-                console.log(Meteor.user());
                 return !!Meteor.user();
             }
         },
