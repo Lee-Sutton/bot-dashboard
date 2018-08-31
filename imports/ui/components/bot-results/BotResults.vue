@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <button id="run-bot" class="btn btn-primary" @click="runBot">Run Bot</button>
-        <table class="table table-hover" data-cy="bot-list">
+        <table v-if="results" class="table table-hover" data-cy="bot-list">
             <thead>
             <tr>
                 <td></td>
@@ -20,14 +20,11 @@
                     <td>{{result.score}}</td>
                     <td><a :href="result.url">{{result.url}}</a></td>
                 </tr>
-                <!--<tr>-->
-                    <!--<th scope="row">-->
-                    <!--</th>-->
-                    <!--&lt;!&ndash;FIXME colspan&ndash;&gt;-->
-                    <!--<td><em>No data available</em></td>-->
-                <!--</tr>-->
             </tbody>
         </table>
+        <div v-else class="container col-xs-6 col-xs-offset-3 center text-center">
+            <p><em>No data available</em></p>
+        </div>
     </div>
 </template>
 
@@ -39,7 +36,6 @@
         name: "BotResults",
         props: ['id'],
         created () {
-            console.log(this.$meteor);
             this.$subscribe('botResults', this.id);
         },
         methods: {
