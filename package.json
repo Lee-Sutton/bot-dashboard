@@ -2,6 +2,7 @@
   "name": "bot-dashboard",
   "private": true,
   "scripts": {
+    "test": "npm run test:unit && npm run test:integration && npm run cypress",
     "cypress": "node_modules/.bin/cypress run",
     "cypress:open": "node_modules/.bin/cypress open",
     "start": "meteor run",
