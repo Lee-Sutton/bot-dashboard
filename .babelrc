@@ -1,8 +1,9 @@
 {
-    "env" : {
-        "test": {
-            "presets": ["env"],
-            "plugins": [["babel-plugin-root-import", { "rootPathPrefix": "/"}]]
-        }
+  "env": {
+    "test": {
+      "presets": [
+        "env"
+      ]
     }
+  }
 }

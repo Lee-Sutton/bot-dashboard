@@ -34,8 +34,9 @@
 </template>
 
 <script>
-    import {Bots} from "/imports/api/bots/bots.js";
-    import Welcome from '/imports/ui/components/welcome/Welcome'
+    import {Bots} from '/imports/api/bots/bots';
+    import Welcome from '/imports/ui/components/welcome/Welcome.vue'
+    import {Meteor} from 'meteor/meteor';
 
     export default {
         components: {
@@ -51,11 +52,9 @@
                 'bots.all': []
             },
             bots() {
-                let bots = Bots.find({});
-                return bots;
+                return Bots.find({});
             },
             loggedIn() {
-                console.log(Meteor.user());
                 return !!Meteor.user();
             }
         },
