@@ -1,6 +1,5 @@
 import {Meteor} from 'meteor/meteor';
 import {BotResults} from '/imports/api/bot-results/bot-results.js';
-import {FlowRouter} from 'meteor/kadira:flow-router';
 import './bot-results.html';
 import moment from 'moment';
 

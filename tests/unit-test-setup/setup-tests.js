@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import VueMeteorTracker from 'vue-meteor-tracker'
 import {Meteor} from 'meteor/meteor';
+import '/imports/startup/server/register-api';
 
 window.Tracker = {};
 window.Meteor = Meteor;
