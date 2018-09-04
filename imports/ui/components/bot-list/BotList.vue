@@ -42,11 +42,6 @@
         components: {
             Welcome
         },
-        methods: {
-            botResults(id) {
-                this.$router.push(`/results/${id}`);
-            }
-        },
         meteor: {
             $subscribe: {
                 'bots.all': []

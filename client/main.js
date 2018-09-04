@@ -5,19 +5,11 @@ import {store} from '/imports/startup/client/store.js';
 import { Accounts } from 'meteor/accounts-base'
 import {router} from '/imports/startup/client/routes';
 import AppLayout from '../imports/ui/AppLayout.vue';
+import '/imports/startup/client/vue-plugins';
 
 Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL',
 });
-
-import Notifications from 'vue-notification';
-Vue.use(Notifications);
-
-import VueTracker from 'vue-meteor-tracker';
-Vue.use(VueTracker);
-
-import VueMeta from 'vue-meta';
-Vue.use(VueMeta);
 
 Meteor.startup(() => {
     new Vue({
