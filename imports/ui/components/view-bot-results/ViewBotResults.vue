@@ -33,7 +33,7 @@
     import {BotResults} from '/imports/api/bot-results/bot-results.js';
 
     export default {
-        name: "BotResults",
+        name: "ViewBotResults",
         props: ['id'],
         created () {
             this.$subscribe('botResults', this.id);
