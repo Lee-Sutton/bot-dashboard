@@ -1,7 +1,7 @@
 
 import {RouterLinkStub, shallowMount} from '@vue/test-utils';
 import {Meteor} from 'meteor/meteor';
-import {Bots} from '/imports/api/bots/bots';
+import {Bot} from '/imports/api/bots/bots';
 import '/imports/startup/client/vue-plugins';
 
 import BotList from '/imports/ui/components/bot-list/BotList.vue';
@@ -27,7 +27,7 @@ describe('#BotList component spec', () => {
         };
         // The user is logged in
         Meteor.user.mockReturnValueOnce(true);
-        Bots.find.mockReturnValue([bot]);
+        Bot.find.mockReturnValue([bot]);
 
         let wrapper = shallowMount(BotList, {stubs: {RouterLink: RouterLinkStub}}),
             routerStub = wrapper.findAll(RouterLinkStub);
