@@ -37,6 +37,7 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "cypress": "^3.0.1",
+    "meteor-cypress": "file:../meteor-cypress",
     "mocha": "^5.2.0",
     "sinon": "^6.1.3",
     "testdouble": "^3.8.1",

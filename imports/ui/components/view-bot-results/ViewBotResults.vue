@@ -22,8 +22,11 @@
                 </tr>
             </tbody>
         </table>
-        <div v-else class="container col-xs-6 col-xs-offset-3 center text-center">
-            <p><em>No data available</em></p>
+        <div v-else>
+            <div class="row"></div>
+            <div class="container col-xs-6 col-xs-offset-3 center text-center">
+                <p><em>No data available</em></p>
+            </div>
         </div>
     </div>
 </template>
@@ -45,7 +48,8 @@
         },
         meteor: {
             results () {
-                return BotResults.find({botId: this.id});
+                let botResults = BotResults.find({botId: this.id});
+                return botResults.count() ? botResults : false;
             },
         }
     }

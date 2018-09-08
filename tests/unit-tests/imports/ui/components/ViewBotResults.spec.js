@@ -1,10 +1,9 @@
 import {RouterLinkStub, shallowMount} from '@vue/test-utils';
-// import {Meteor} from 'meteor/meteor';
 import {BotResults} from '/imports/api/bot-results/bot-results';
 import '/imports/startup/client/vue-plugins';
 
-// TODO rename BotResults component to ViewBotResults
 import ViewBotResults from '/imports/ui/components/view-bot-results/ViewBotResults';
+import {emptyCursor} from '/tests/utils.js';
 
 
 beforeEach(() => jest.resetAllMocks());
@@ -30,4 +29,12 @@ test('should list the bot results', () => {
     expect(wrapper.html()).toContain(botResults.date);
     expect(wrapper.html()).toContain(botResults.title);
     expect(wrapper.html()).toContain(botResults.score);
+});
+
+test('should indicate if there are no results', () => {
+    BotResults.find.mockReturnValue(emptyCursor);
+
+    let wrapper = shallowMount(ViewBotResults, {stubs: {RouterLink: RouterLinkStub}});
+
+    expect(wrapper.html()).toContain('No data available');
 });

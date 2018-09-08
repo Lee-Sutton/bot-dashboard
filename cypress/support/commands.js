@@ -24,9 +24,19 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("login", (email = 'john@mailinator.com', password = 'password') => {
+Cypress.Commands.add('login', (email = 'john@mailinator.com', password = 'password') => {
     cy.get('#login-sign-in-link').click();
     cy.get('#login-username-or-email').type(email, {force: true});
     cy.get('#login-password').type(password, {force: true});
     cy.get('#login-buttons-password').click({force: true});
+});
+
+Cypress.Commands.add('resetDatabase', () => {
+    cy.exec('node ./node_modules/.bin/meteor-cypress drop')
+});
+
+Cypress.Commands.add('seedTestUsers', () => {
+    cy.window().then((win) => {
+        win.Meteor.call('seedTestUsers');
+    })
 });
