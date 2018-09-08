@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import {Bots} from '/imports/api/bots/bots';
+    import {Bot} from '/imports/api/bots/bots';
     import Welcome from '/imports/ui/components/welcome/Welcome.vue'
     import {Meteor} from 'meteor/meteor';
 
@@ -47,7 +47,7 @@
                 'bots.all': []
             },
             bots() {
-                return Bots.find({});
+                return Bot.find({});
             },
             loggedIn() {
                 return !!Meteor.user();

@@ -1,7 +1,7 @@
 
 import App from '/imports/ui/components/bot-list/BotList';
 import AddBot from '/imports/ui/components/add-bot/AddBot';
-import ViewBotResults from '/imports/ui/components/bot-results/ViewBotResults';
+import ViewBotResults from '/imports/ui/components/view-bot-results/ViewBotResults';
 import NotFound from '/imports/ui/NotFound.vue';
 import VueRouter from "vue-router";
 import Vue from 'vue';
