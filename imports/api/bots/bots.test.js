@@ -1,10 +1,7 @@
-// Tests for the behavior of the links collection
-//
-// https://guide.meteor.com/testing.html
 
 import { Meteor } from 'meteor/meteor';
-import { assert } from 'chai';
-import { Bots } from './bots.js';
+import { assert, expect } from 'chai';
+import { Bots, Bot } from './bots.js';
 
 if (Meteor.isServer) {
     describe('bots collection', function () {
@@ -20,6 +17,13 @@ if (Meteor.isServer) {
 
             assert.equal(collectionName, 'bots');
             assert.equal(count, 1);
+        });
+        it('should validate input args', function () {
+            const badInput = () => {
+               let bot = new Bot({name: 1});
+               bot.save();
+            };
+            expect(badInput).to.throw('[validation-error]');
         });
     });
 }
