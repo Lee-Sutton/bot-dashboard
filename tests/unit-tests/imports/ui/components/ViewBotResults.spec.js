@@ -3,18 +3,11 @@ import {BotResults} from '/imports/api/bot-results/bot-results';
 import '/imports/startup/client/vue-plugins';
 
 import ViewBotResults from '/imports/ui/components/view-bot-results/ViewBotResults';
-import {emptyCursor} from '/tests/utils.js';
-
+import {Cursor} from '/tests/utils.js';
 
 beforeEach(() => jest.resetAllMocks());
 
 afterEach(() => jest.resetAllMocks());
-
-// test('should subscribe to botResults', () => {
-//     let spy = jest.spyOn(Meteor, 'subscribe');
-//     shallowMount(ViewBotResults, {stubs: {RouterLink: RouterLinkStub}});
-//     expect(spy.mock.calls[0][0]).toContain('botResults');
-// });
 
 test('should list the bot results', () => {
     let botResults = {
@@ -22,8 +15,11 @@ test('should list the bot results', () => {
         title: 'testing',
         score: 100
     };
-    BotResults.find.mockReturnValue([botResults]);
-
+    let mockResults = new Cursor(botResults);
+    BotResults.find.mockReturnValue(mockResults);
+    let results = BotResults.find();
+    console.log(results);
+    console.log(results instanceof Cursor);
     let wrapper = shallowMount(ViewBotResults, {stubs: {RouterLink: RouterLinkStub}});
 
     expect(wrapper.html()).toContain(botResults.date);
@@ -32,7 +28,7 @@ test('should list the bot results', () => {
 });
 
 test('should indicate if there are no results', () => {
-    BotResults.find.mockReturnValue(emptyCursor);
+    BotResults.find.mockReturnValue(new Cursor());
 
     let wrapper = shallowMount(ViewBotResults, {stubs: {RouterLink: RouterLinkStub}});
 
