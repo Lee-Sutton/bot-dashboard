@@ -25,6 +25,7 @@ describe('Application dashboard test suite', function() {
         cy.visit('/');
         cy.seedTestUsers();
     });
+
     it('Should greet the user with a dashboard', function() {
         // The user visits bots dashboard page
         cy.get('body').contains('Sign in or create an account to get started').should('be.visible');

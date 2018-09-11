@@ -1,5 +1,5 @@
 import {RouterLinkStub, shallowMount} from '@vue/test-utils';
-import {BotResults} from '/imports/api/bot-results/bot-results';
+import {BotResult} from '/imports/api/bot-results/bot-results';
 import '/imports/startup/client/vue-plugins';
 
 import ViewBotResults from '/imports/ui/components/view-bot-results/ViewBotResults';
@@ -15,11 +15,8 @@ test('should list the bot results', () => {
         title: 'testing',
         score: 100
     };
-    let mockResults = new Cursor(botResults);
-    BotResults.find.mockReturnValue(mockResults);
-    let results = BotResults.find();
-    console.log(results);
-    console.log(results instanceof Cursor);
+
+    BotResult.find.mockReturnValue(new Cursor(botResults));
     let wrapper = shallowMount(ViewBotResults, {stubs: {RouterLink: RouterLinkStub}});
 
     expect(wrapper.html()).toContain(botResults.date);
@@ -28,7 +25,7 @@ test('should list the bot results', () => {
 });
 
 test('should indicate if there are no results', () => {
-    BotResults.find.mockReturnValue(new Cursor());
+    BotResult.find.mockReturnValue(new Cursor());
 
     let wrapper = shallowMount(ViewBotResults, {stubs: {RouterLink: RouterLinkStub}});
 

@@ -33,7 +33,7 @@
 
 <script>
     import {Meteor} from 'meteor/meteor';
-    import {BotResults} from '/imports/api/bot-results/bot-results.js';
+    import {BotResult} from '/imports/api/bot-results/bot-results.js';
 
     export default {
         name: "ViewBotResults",
@@ -48,7 +48,7 @@
         },
         meteor: {
             results () {
-                let botResults = BotResults.find({botId: this.id});
+                let botResults = BotResult.find({botId: this.id});
                 return botResults.count() ? botResults : false;
             },
         }
