@@ -50,8 +50,6 @@ describe('Application dashboard test suite', function() {
 
         // This opens a new page where the user can run the bot
         cy.url().should('contain', 'results');
-        cy.contains('Date').should('be.visible');
-        cy.contains('Title').should('be.visible');
         cy.contains('No data available').should('be.visible');
 
         // Mock out meteor method here and make sure it's called
