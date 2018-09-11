@@ -3,8 +3,8 @@
 // https://guide.meteor.com/testing.html
 
 import {Meteor} from 'meteor/meteor';
-import {assert} from 'chai';
-import {BotResults} from './bot-results.js';
+import {assert, expect} from 'chai';
+import {BotResult} from './bot-results.js';
 
 if (Meteor.isServer) {
     describe('bots collection', function() {
@@ -15,14 +15,20 @@ if (Meteor.isServer) {
             };
 
         it('insert correctly', function() {
-            const _id = BotResults.insert(dummyResults);
+            const _id = BotResult.insert(dummyResults);
 
-            const added = BotResults.find({_id});
+            const added = BotResult.find({_id});
             const collectionName = added._getCollectionName();
             const count = added.count();
 
             assert.equal(collectionName, 'botResults');
             assert.equal(count, 1);
+        });
+        it('should validate input args', function () {
+            const fnThrows = () => {
+                BotResult.insert({});
+            };
+            expect(fnThrows).to.throw();
         });
     });
 }
