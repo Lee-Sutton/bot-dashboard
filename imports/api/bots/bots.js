@@ -9,9 +9,9 @@ export const Bot = Class.create({
     fields: {
         name: String,
         keyword: String,
-        minimumScore: Number,
         subreddit: String,
-        description: String,
+        description: {type: String, default: ''},
+        minimumScore: {type: Number, default: 0},
     }
 });
 

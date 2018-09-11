@@ -1,17 +1,17 @@
-
-import { Meteor } from 'meteor/meteor';
-import { assert, expect } from 'chai';
-import { Bots, Bot } from './bots.js';
+import {Meteor} from 'meteor/meteor';
+import {assert, expect} from 'chai';
+import {Bot} from './bots.js';
 
 if (Meteor.isServer) {
     describe('bots collection', function () {
         it('insert correctly', function () {
-            const botId = Bots.insert({
-              name: 'test bot',
-              description: 'description would go here',
+            const botId = Bot.insert({
+                name: 'test bot',
+                subreddit: 'dummySubreddit',
+                keyword: 'dummy keyword'
             });
 
-            const added = Bots.find({ _id: botId });
+            const added = Bot.find({_id: botId});
             const collectionName = added._getCollectionName();
             const count = added.count();
 
@@ -20,8 +20,8 @@ if (Meteor.isServer) {
         });
         it('should validate input args', function () {
             const badInput = () => {
-               let bot = new Bot({name: 1});
-               bot.save();
+                let bot = new Bot({name: 1});
+                bot.save();
             };
             expect(badInput).to.throw('[validation-error]');
         });
