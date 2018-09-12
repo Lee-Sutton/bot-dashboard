@@ -19,6 +19,11 @@ const fillAddBotModal = (name, description) => {
     cy.get('[data-cy=add-bot-btn]').click();
 };
 
+const fillSetupNotifcation = () => {
+    cy.get('#email-notification').select();
+    cy.get('#save').click();
+};
+
 describe('Application dashboard test suite', function() {
     beforeEach(function () {
         cy.resetDatabase();
@@ -63,6 +68,9 @@ describe('Application dashboard test suite', function() {
         cy.window().then((win) => {
             expect(win.Meteor.call).to.have.been.calledWith('runBot');
         });
+
+        // The user wants to setup email notifications for the bot
+        cy.get('[data-cy=add-notification]').click();
     });
 });
 
