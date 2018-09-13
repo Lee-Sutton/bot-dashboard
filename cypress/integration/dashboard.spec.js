@@ -70,7 +70,7 @@ describe('Application dashboard test suite', function() {
         });
 
         // The user wants to setup email notifications for the bot
-        cy.get('[data-cy=add-notification]').click();
+        cy.get('[data-cy=notifications]').click();
     });
 });
 

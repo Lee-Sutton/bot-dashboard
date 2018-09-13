@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <button id="run-bot" class="btn btn-primary" @click="runBot">Run Bot</button>
+        <button id="notifications" class="btn btn-default" data-cy="notifications" @click="addNotification">Notifications</button>
         <table v-if="results" class="table table-hover" data-cy="bot-list">
             <thead>
             <tr>
