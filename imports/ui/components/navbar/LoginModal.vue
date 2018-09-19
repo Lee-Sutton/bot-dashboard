@@ -1,33 +1,47 @@
 <template>
-    <b-modal id="loginModal" ref="loginModalRef" title="Login" @ok="handleOk">
-        <div class="d-block">
-            <b-form @submit="handleSubmit">
-                <b-form-group
-                        label="Email"
-                        label-for="email">
-                    <b-form-input required id="email" v-model.trim="email"></b-form-input>
-                </b-form-group>
-                <b-form-group
-                        label="Password"
-                        label-for="password">
-                    <b-form-input required type="password" id="password" v-model.trim="password"></b-form-input>
-                </b-form-group>
-            </b-form>
-        </div>
-    </b-modal>
+    <div>
+        <b-nav-item v-b-modal.loginModal id="login-sign-in-link">{{userState}}</b-nav-item>
+        <!--</div>-->
+        <!--<div v-else>-->
+
+        <!--</div>-->
+        <b-modal id="loginModal" ref="loginModalRef" title="Login" @ok="handleOk">
+            <div class="d-block">
+                <b-form @submit="handleSubmit">
+                    <b-form-group
+                            label="Email"
+                            label-for="email">
+                        <b-form-input required id="email" v-model.trim="email"></b-form-input>
+                    </b-form-group>
+                    <b-form-group
+                            label="Password"
+                            label-for="password">
+                        <b-form-input required type="password" id="password" v-model.trim="password"></b-form-input>
+                    </b-form-group>
+                </b-form>
+            </div>
+        </b-modal>
+    </div>
 </template>
 <script>
     export default {
-        name: 'LoginModal',
+        name: 'UserAccount',
         data () {
             return {
                 email: '',
                 password: ''
             }
         },
+        meteor: {
+            userState () {
+                if (Meteor.user()) {
+                    return Meteor.user().emails[0].address;
+                }
+                return 'Login';
+            }
+        },
         methods: {
             handleOk (event) {
-                console.log('this is running');
                 event.preventDefault();
                 this.handleSubmit();
             },
