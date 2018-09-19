@@ -1,7 +1,11 @@
 <template>
     <div id="app">
-        <navbar></navbar>
-        <router-view></router-view>
+        <div class="mb-4">
+            <navbar></navbar>
+        </div>
+        <div class="container">
+            <router-view></router-view>
+        </div>
         <notifications group="foo" />
     </div>
 </template>

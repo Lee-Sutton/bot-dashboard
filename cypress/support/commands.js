@@ -25,10 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', (email = 'john@mailinator.com', password = 'password') => {
-    cy.get('#login-sign-in-link').click();
-    cy.get('#login-username-or-email').type(email, {force: true});
-    cy.get('#login-password').type(password, {force: true});
-    cy.get('#login-buttons-password').click({force: true});
+    cy.window().then((win) => {
+        win.Meteor.loginWithPassword(email, password);
+    });
 });
 
 Cypress.Commands.add('resetDatabase', () => {
