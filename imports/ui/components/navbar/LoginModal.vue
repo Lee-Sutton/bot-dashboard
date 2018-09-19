@@ -27,6 +27,8 @@
     </div>
 </template>
 <script>
+    import {User} from '/imports/api/users/users.js';
+
     export default {
         name: 'UserAccount',
         data () {
@@ -38,7 +40,8 @@
         meteor: {
             userState () {
                 if (Meteor.user()) {
-                    return Meteor.user().emails[0].address;
+                    let currentUser = Meteor.user();
+                    return User.findOne(currentUser).primaryEmail();
                 }
                 return 'Login';
             },
