@@ -1,10 +1,13 @@
 <template>
     <div>
-        <b-nav-item v-b-modal.loginModal id="login-sign-in-link">{{userState}}</b-nav-item>
-        <!--</div>-->
-        <!--<div v-else>-->
-
-        <!--</div>-->
+        <div v-if="loggedIn">
+            <b-nav-item-dropdown id="login-sign-in-link" v-bind:text="userState">
+                <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+            </b-nav-item-dropdown>
+        </div>
+        <div v-else>
+            <b-nav-item v-b-modal.loginModal id="login-sign-in-link">{{userState}}</b-nav-item>
+        </div>
         <b-modal id="loginModal" ref="loginModalRef" title="Login" @ok="handleOk">
             <div class="d-block">
                 <b-form @submit="handleSubmit">
@@ -38,12 +41,18 @@
                     return Meteor.user().emails[0].address;
                 }
                 return 'Login';
+            },
+            loggedIn () {
+                return !!Meteor.user();
             }
         },
         methods: {
             handleOk (event) {
                 event.preventDefault();
                 this.handleSubmit();
+            },
+            logout () {
+                Meteor.logout();
             },
             handleSubmit () {
                 Meteor.loginWithPassword(this.email, this.password, (err) => {
