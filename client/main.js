@@ -6,6 +6,7 @@ import { Accounts } from 'meteor/accounts-base'
 import {router} from '/imports/startup/client/routes';
 import AppLayout from '../imports/ui/AppLayout.vue';
 import '/imports/startup/client/vue-plugins';
+
 import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';

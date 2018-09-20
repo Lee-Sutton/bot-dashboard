@@ -17,6 +17,6 @@ describe('', () => {
     it('should render the search bar if the user is logged in', () => {
         Meteor.user.mockReturnValueOnce(true);
         let wrapper = mount(navbar);
-        expect(wrapper.html()).toContain('Submit');
+        expect(wrapper.html()).toContain('Search');
     });
 });
