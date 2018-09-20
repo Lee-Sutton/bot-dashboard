@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import UserAccount from "./LoginModal";
+    import UserAccount from "./UserAccount";
 
     export default {
         name: 'Login',
