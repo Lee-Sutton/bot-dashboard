@@ -23,7 +23,6 @@ export const User = Class.create({
     },
     helpers: {
         primaryEmail () {
-            console.log(this);
             return this.emails[0].address;
         }
     }

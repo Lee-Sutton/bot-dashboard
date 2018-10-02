@@ -31,7 +31,7 @@ describe('Application dashboard test suite', function() {
         cy.seedTestUsers();
     });
 
-    it('should allow the user to login', function () {
+    it.only('should allow the user to login', function () {
         let email = 'john@mailinator.com',
             password = 'password';
 
@@ -46,7 +46,7 @@ describe('Application dashboard test suite', function() {
         cy.get('#login-sign-in-link').should('be.visible');
     });
 
-    it.only('Should greet the user with a dashboard', function() {
+    it('Should greet the user with a dashboard', function() {
         // The user visits bots dashboard page
         cy.get('body').contains('Sign in or create an account to get started').should('be.visible');
 

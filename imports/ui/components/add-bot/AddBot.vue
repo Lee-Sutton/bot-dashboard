@@ -77,7 +77,6 @@
                             title: 'Bot Added',
                             type: 'success',
                             text: 'Bot added successfully',
-                            position: 'bottom-left'
                         });
                     }
 

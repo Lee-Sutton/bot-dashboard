@@ -5,7 +5,7 @@
     "test": "npm run test:unit && npm run test:integration && npm run cypress",
     "cypress": "node_modules/.bin/cypress run",
     "cypress:open": "node_modules/.bin/cypress open",
-    "start": "meteor run --settings dev.json",
+    "start": "meteor run --settings settings.json",
     "test:unit": "jest --config tests/unit-test-setup/jest-config.js",
     "test:integration-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000",
     "test:integration": "meteor test --once --driver-package meteortesting:mocha --port 4000"
