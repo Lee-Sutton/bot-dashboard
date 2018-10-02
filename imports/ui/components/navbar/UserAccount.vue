@@ -2,7 +2,7 @@
     <div>
         <div v-if="loggedIn">
             <b-nav-item-dropdown id="login-sign-in-link" v-bind:text="userState">
-                <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+                <b-dropdown-item id="logout" @click="logout">Logout</b-dropdown-item>
             </b-nav-item-dropdown>
         </div>
         <div v-else>

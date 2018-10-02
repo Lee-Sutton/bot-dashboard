@@ -6,12 +6,16 @@ import {User} from "../../../../../imports/api/users/users";
 import UserAccount from '/imports/ui/components/navbar/UserAccount';
 
 describe('#UserAccount component spec', () => {
-    let wrapper;
-
+    let wrapper,
+        email = 'dummy@e.com';
 
     beforeEach(() => {
         jest.resetAllMocks();
         Meteor.user.mockReturnValue(false);
+
+        User.findOne.mockReturnValue({
+            primaryEmail: () => email
+        });
     });
 
     it('should render', () => {
@@ -20,13 +24,9 @@ describe('#UserAccount component spec', () => {
     });
 
     it('should display the logged in users email', () => {
-        let email = 'dummy@e.com';
 
         Meteor.user.mockReturnValue(true);
 
-        User.findOne.mockReturnValue({
-              primaryEmail: () => email
-        });
 
         wrapper = mount(UserAccount);
         expect(wrapper.find('#login-sign-in-link').html()).toContain(email);
@@ -45,4 +45,10 @@ describe('#UserAccount component spec', () => {
         expect(Meteor.loginWithPassword.mock.calls[0][1]).toBe(password);
     });
 
+    it('should log the user out', () => {
+        Meteor.user.mockReturnValue(true);
+        wrapper = mount(UserAccount);
+        wrapper.find('#logout').trigger('click');
+        expect(Meteor.logout.mock.calls.length).toBe(1);
+    });
 });

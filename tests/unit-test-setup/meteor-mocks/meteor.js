@@ -4,6 +4,7 @@ const Meteor = {
     isServer: true,
     loginWithPassword: jest.fn(),
     loginWithFacebook: jest.fn(),
+    logout: jest.fn(),
     methods: jest.fn(),
     call: jest.fn(),
     user: jest.fn(),
