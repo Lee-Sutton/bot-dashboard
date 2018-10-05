@@ -1,6 +1,7 @@
 
 import {mount} from '@vue/test-utils';
 import {Meteor} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
 import {User} from "../../../../../imports/api/users/users";
 
 import UserAccount from '/imports/ui/components/navbar/UserAccount';
@@ -39,11 +40,16 @@ describe('#UserAccount component spec', () => {
         wrapper.find('#login-sign-in-link').trigger('click');
         wrapper.find('#email').setValue(email)
         wrapper.find('#password').setValue(password);
-        wrapper.find('form').trigger('submit');
+        wrapper.vm.handleOk({preventDefault: () => {}});
 
         expect(Meteor.loginWithPassword.mock.calls[0][0]).toBe(email);
         expect(Meteor.loginWithPassword.mock.calls[0][1]).toBe(password);
         let callback = Meteor.loginWithPassword.mock.calls[0][2];
+
+        wrapper.vm.$notify = jest.fn();
+
+        callback({});
+        expect(wrapper.vm.$notify.mock.calls.length).toBe(1);
         callback();
     });
 
@@ -52,5 +58,29 @@ describe('#UserAccount component spec', () => {
         wrapper = mount(UserAccount);
         wrapper.find('#logout').trigger('click');
         expect(Meteor.logout.mock.calls.length).toBe(1);
+    });
+
+    it('should allow the user to create an account', function () {
+        let email = 'dummy@e.com',
+            password = 'password';
+        wrapper = mount(UserAccount);
+        wrapper.find('#login-sign-in-link').trigger('click');
+
+        wrapper.vm.newUser = true;
+
+        wrapper.find('#email').setValue(email);
+        wrapper.find('#password').setValue(password);
+        wrapper.find('#password-confirm').setValue(password);
+
+        wrapper.vm.handleOk({preventDefault: () => {}});
+
+        expect(Accounts.createUser.mock.calls.length).toBe(1);
+
+        let callback = Accounts.createUser.mock.calls[0][1];
+        wrapper.vm.$notify = jest.fn();
+
+        callback({});
+        expect(wrapper.vm.$notify.mock.calls.length).toBe(1);
+        callback();
     });
 });
