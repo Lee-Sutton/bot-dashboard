@@ -31,7 +31,7 @@ describe('Application dashboard test suite', function() {
         cy.seedTestUsers();
     });
 
-    it.only('should allow the user to login', function () {
+    it('should allow the user to login', function () {
         let email = 'john@mailinator.com',
             password = 'password';
 
@@ -44,6 +44,21 @@ describe('Application dashboard test suite', function() {
         cy.get('.navbar').contains(email).click();
         cy.contains('Logout').click();
         cy.get('#login-sign-in-link').should('be.visible');
+    });
+
+    it('should allow the user to create an account', () => {
+        let newUser = {
+            email: 'lee@e.com',
+            password: 'password'
+        };
+
+        cy.get('#login-sign-in-link').click();
+        cy.contains('Create an account').click();
+        cy.get('#email').type(newUser.email);
+        cy.get('#password').type(newUser.password);
+        cy.get('#password-confirm').type(newUser.password);
+        cy.get('.btn-primary').click()
+        cy.get('.navbar').contains(newUser.email).should('be.visible');
     });
 
     it('Should greet the user with a dashboard', function() {

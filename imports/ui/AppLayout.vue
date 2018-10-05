@@ -6,7 +6,8 @@
         <div class="container">
             <router-view></router-view>
         </div>
-        <notifications group="sAlert" position="bottom-left"/>
+        <notifications group="sAlert"/>
+        <notifications group="auth" position="top" width="100%"/>
     </div>
 </template>
 

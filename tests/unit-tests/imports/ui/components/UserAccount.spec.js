@@ -43,6 +43,8 @@ describe('#UserAccount component spec', () => {
 
         expect(Meteor.loginWithPassword.mock.calls[0][0]).toBe(email);
         expect(Meteor.loginWithPassword.mock.calls[0][1]).toBe(password);
+        let callback = Meteor.loginWithPassword.mock.calls[0][2];
+        callback();
     });
 
     it('should log the user out', () => {
