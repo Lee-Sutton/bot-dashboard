@@ -12,6 +12,10 @@ export const Bot = Class.create({
         subreddit: String,
         description: {type: String, default: ''},
         minimumScore: {type: Number, default: 0},
+        notification: {
+            type: Boolean,
+            default: false,
+        }
     }
 });
 

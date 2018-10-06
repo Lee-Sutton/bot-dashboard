@@ -12,5 +12,8 @@ Meteor.methods({
         check(bot.description, Match.OneOf(String, null));
         bot.userId = this.userId;
         return Bots.insert(bot);
+    },
+    addBotNotification () {
+
     }
 });
