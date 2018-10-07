@@ -20,12 +20,12 @@
 </template>
 
 <script>
-    import {Meteor} from 'meteor/meteor';
+    import {Bot} from '/imports/api/bots/bots';
 
     export default {
         name: 'NotificationModal',
         props: ['id'],
-        data () {
+        data() {
             return {
                 notification: false,
                 show: false,
@@ -33,7 +33,8 @@
         },
         methods: {
             saveNotification() {
-                Meteor.call('addBotNotification', this.id, (err) => {
+                let bot = Bot.findOne({});
+                bot.setNotification(this.notification, (err) => {
                     if (err) {
                         this.$notify({
                             group: 'sAlert',

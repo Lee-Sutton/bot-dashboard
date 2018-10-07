@@ -61,7 +61,7 @@ describe('Application dashboard test suite', function() {
         cy.get('.navbar').contains(newUser.email).should('be.visible');
     });
 
-    it('Should allow the user to create bots', function() {
+    it.only('Should allow the user to create bots', function() {
         // The user visits bots dashboard page
         cy.get('body').contains('Sign in or create an account to get started').should('be.visible');
 
@@ -101,9 +101,8 @@ describe('Application dashboard test suite', function() {
 
         // The user wants to setup email notifications for the bot
         cy.get('[data-cy=notifications]').click();
-        cy.get('[data-cy=email-checkbox').select();
-        cy.get('[data-cy=frequency]').select('Daily');
-        cy.get('[data-cy=submit]').click();
+        cy.get('[type=checkbox]').click({force: true});
+        cy.contains('Save').click();
 
         cy.window().then((win) => {
             expect(win.Meteor.call).to.have.been.calledWith('addNotification');
