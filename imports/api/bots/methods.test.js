@@ -73,16 +73,5 @@ if (Meteor.isServer) {
             });
         });
 
-        describe('#addBotNotification', function () {
-            const addBotNotification = Meteor.server.method_handlers['addBotNotification'];
-            beforeEach(function () {
-                let bot = new Bot(dummyBot);
-                bot.save();
-            })
-
-            it('should add a notification', function () {
-
-            });
-        });
     });
 }

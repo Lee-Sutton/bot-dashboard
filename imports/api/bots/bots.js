@@ -16,6 +16,12 @@ export const Bot = Class.create({
             type: Boolean,
             default: false,
         }
+    },
+    meteorMethods: {
+        setNotification(notification) {
+            this.notification = notification;
+            this.save();
+        }
     }
 });
 
