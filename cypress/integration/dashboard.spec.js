@@ -19,10 +19,6 @@ const fillAddBotModal = (name, description) => {
     cy.get('[data-cy=add-bot-btn]').click();
 };
 
-const fillSetupNotifcation = () => {
-    cy.get('#email-notification').select();
-    cy.get('#save').click();
-};
 
 describe('Application dashboard test suite', function() {
     beforeEach(function () {

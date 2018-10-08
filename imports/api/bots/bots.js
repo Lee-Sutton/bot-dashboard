@@ -10,6 +10,7 @@ export const Bot = Class.create({
         name: String,
         keyword: String,
         subreddit: String,
+        userId: {type: String, default: null},
         description: {type: String, default: ''},
         minimumScore: {type: Number, default: 0},
         notification: {
@@ -18,6 +19,10 @@ export const Bot = Class.create({
         }
     },
     meteorMethods: {
+        'insert' () {
+            this.userId = Meteor.userId();
+            return this.save();
+        },
         setNotification(notification) {
             this.notification = notification;
             this.save();

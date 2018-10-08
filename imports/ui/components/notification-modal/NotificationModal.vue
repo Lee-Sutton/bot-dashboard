@@ -33,7 +33,10 @@
         },
         methods: {
             saveNotification() {
-                let bot = Bot.findOne({});
+                let botId = this.$route.params.id;
+                console.log(botId);
+                let bot = Bot.findOne({_id: botId});
+                console.log(bot);
                 bot.setNotification(this.notification, (err) => {
                     if (err) {
                         this.$notify({
@@ -52,6 +55,11 @@
                     this.show = false;
                 });
             }
+        },
+        meteor: {
+            $subscribe: {
+                'bots.all': []
+            },
         }
     }
 </script>

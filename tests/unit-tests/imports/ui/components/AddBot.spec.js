@@ -1,8 +1,8 @@
-
 import {mount} from '@vue/test-utils';
-import {Meteor} from 'meteor/meteor';
 
 import AddBot from '/imports/ui/components/add-bot/AddBot';
+import {astonomyMocks, resetAstronomyMocks} from '../../../../unit-test-setup/meteor-mocks/jagi:astronomy';
+
 
 describe('#AddBot component spec', () => {
     let wrapper,
@@ -10,6 +10,8 @@ describe('#AddBot component spec', () => {
 
     beforeEach(() => {
         jest.resetAllMocks();
+        resetAstronomyMocks();
+
         botName = 'testing';
         wrapper = mount(AddBot);
 
@@ -29,23 +31,23 @@ describe('#AddBot component spec', () => {
     it('should store the form inputs as a bot', () => {
         wrapper.find('form').trigger('submit');
 
-        expect(Meteor.call.mock.calls.length).toBe(1);
-        expect(Meteor.call.mock.calls[0][0]).toContain('bots.insert');
-
-        let inputBot = Meteor.call.mock.calls[0][1];
-        expect(inputBot.name).toBe(botName);
+        let mockBot = astonomyMocks[0];
+        expect(mockBot.insert.mock.calls.length).toBe(1);
     });
 
     it('should redirect the user back to the home page', () => {
         wrapper.find('form').trigger('submit');
-        let callback = Meteor.call.mock.calls[0][2];
+        let mockBot = astonomyMocks[0],
+            callback = mockBot.insert.mock.calls[0].pop();
+
         callback();
         expect(wrapper.vm.$router.push.mock.calls[0][0]).toContain('/');
     });
 
     it('should notify the user if an error occured', () => {
         wrapper.find('form').trigger('submit');
-        let callback = Meteor.call.mock.calls[0][2],
+        let mockBot = astonomyMocks[0],
+            callback = mockBot.insert.mock.calls[0].pop(),
             error = {};
 
         callback(error);
