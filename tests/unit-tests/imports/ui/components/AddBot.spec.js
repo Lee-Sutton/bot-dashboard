@@ -1,8 +1,9 @@
 import {mount} from '@vue/test-utils';
-
+import toBeType from "jest-tobetype";
 import AddBot from '/imports/ui/components/add-bot/AddBot';
-import {astonomyMocks, resetAstronomyMocks} from '../../../../unit-test-setup/meteor-mocks/jagi:astronomy';
+import {astonomyMocks, resetAstronomyMocks} from '/tests/unit-test-setup/meteor-mocks/jagi:astronomy';
 
+expect.extend({toBeType});
 
 describe('#AddBot component spec', () => {
     let wrapper,
@@ -32,7 +33,15 @@ describe('#AddBot component spec', () => {
         wrapper.find('form').trigger('submit');
 
         let mockBot = astonomyMocks[0];
+
         expect(mockBot.insert.mock.calls.length).toBe(1);
+
+        let insertedBot = mockBot.params;
+        expect(typeof insertedBot.name).toBe('string');
+        expect(typeof insertedBot.subreddit).toBe('string');
+        expect(typeof insertedBot.keyword).toBe('string');
+        expect(typeof insertedBot.description).toBe('string');
+        expect(typeof insertedBot.minimumScore).toBe('number');
     });
 
     it('should redirect the user back to the home page', () => {

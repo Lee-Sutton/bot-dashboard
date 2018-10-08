@@ -5,6 +5,7 @@ import {Meteor} from 'meteor/meteor';
 import '/imports/startup/server/register-api';
 
 import BootstrapVue from 'bootstrap-vue';
+
 Vue.use(BootstrapVue);
 
 window.Tracker = {};

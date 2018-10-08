@@ -99,10 +99,6 @@ describe('Application dashboard test suite', function() {
         cy.get('[data-cy=notifications]').click();
         cy.get('[type=checkbox]').click({force: true});
         cy.contains('Save').click();
-
-        cy.window().then((win) => {
-            expect(win.Meteor.call).to.have.been.calledWith('addNotification');
-        });
     });
 });
 

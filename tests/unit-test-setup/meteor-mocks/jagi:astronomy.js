@@ -7,8 +7,9 @@ export const resetAstronomyMocks = () => {
 };
 
 class AstronomyMock extends Mongo.Collection {
-    constructor() {
+    constructor(params) {
         super();
+        this.params = params;
         astonomyMocks.push(this);
         this.softRemove = jest.fn();
         this.save = jest.fn();
@@ -19,7 +20,11 @@ class AstronomyMock extends Mongo.Collection {
     static find () {}
 }
 
-AstronomyMock.prototype.constructor = jest.fn();
+AstronomyMock.insert = jest.fn();
+AstronomyMock.findOne = jest.fn();
+AstronomyMock.update = jest.fn();
+AstronomyMock.find = jest.fn();
+
 
 export const Class = {
     create() {

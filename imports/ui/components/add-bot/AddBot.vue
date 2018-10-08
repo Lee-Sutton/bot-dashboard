@@ -50,7 +50,7 @@
                 name: '',
                 subreddit: '',
                 keyword: '',
-                score: '',
+                score: 0,
                 description: ''
             }
         },
@@ -60,7 +60,7 @@
                         name: this.name,
                         subreddit: this.subreddit,
                         keyword: this.keyword,
-                        minimumScore: this.score,
+                        minimumScore: parseInt(this.score),
                         description: this.description
                     });
                 bot.insert((err) => {
