@@ -3,7 +3,9 @@
 
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-        <b-navbar-brand href="#">Reddit Bots</b-navbar-brand>
+
+        <router-link class="navbar-brand" to="/">Reddit Bots</router-link>
+        <!--<b-navbar-brand href="">Reddit Bots</b-navbar-brand>-->
 
         <Login/>
 

@@ -4,9 +4,7 @@
            <div class="d-block">
                <b-form ref="form" @submit.prevent="createUser">
                    <b-form-checkbox id="email-notification"
-                                    v-model="notification"
-                                    value="notification"
-                                    unchecked-value="false">
+                                    v-model="notification">
                        Email me on sunday when this bot finds new music
                    </b-form-checkbox>
                </b-form>
@@ -24,7 +22,6 @@
 
     export default {
         name: 'NotificationModal',
-        props: ['id'],
         data() {
             return {
                 notification: false,
@@ -34,9 +31,8 @@
         methods: {
             saveNotification() {
                 let botId = this.$route.params.id;
-                console.log(botId);
                 let bot = Bot.findOne({_id: botId});
-                console.log(bot);
+
                 bot.setNotification(this.notification, (err) => {
                     if (err) {
                         this.$notify({
