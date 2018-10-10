@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import toBeType from "jest-tobetype";
 import AddBot from '/imports/ui/components/add-bot/AddBot';
-import {astonomyMocks, resetAstronomyMocks} from '/tests/unit-test-setup/meteor-mocks/jagi:astronomy';
+import {insertBot} from '/imports/api/bots/bots';
 
 expect.extend({toBeType});
 
@@ -11,7 +11,6 @@ describe('#AddBot component spec', () => {
 
     beforeEach(() => {
         jest.resetAllMocks();
-        resetAstronomyMocks();
 
         botName = 'testing';
         wrapper = mount(AddBot);
@@ -32,11 +31,11 @@ describe('#AddBot component spec', () => {
     it('should store the form inputs as a bot', () => {
         wrapper.find('form').trigger('submit');
 
-        let mockBot = astonomyMocks[0];
+        expect(insertBot.call.mock.calls.length).to.be(1);
 
-        expect(mockBot.insert.mock.calls.length).toBe(1);
+        let insertedBot, callback;
+        [insertedBot, callback] = insertBot.call.mock.calls[0];
 
-        let insertedBot = mockBot.params;
         expect(typeof insertedBot.name).toBe('string');
         expect(typeof insertedBot.subreddit).toBe('string');
         expect(typeof insertedBot.keyword).toBe('string');
@@ -46,8 +45,11 @@ describe('#AddBot component spec', () => {
 
     it('should redirect the user back to the home page', () => {
         wrapper.find('form').trigger('submit');
-        let mockBot = astonomyMocks[0],
-            callback = mockBot.insert.mock.calls[0].pop();
+
+        expect(insertBot.call.mock.calls.length).to.be(1);
+
+        let insertedBot, callback;
+        [insertedBot, callback] = insertBot.call.mock.calls[0];
 
         callback();
         expect(wrapper.vm.$router.push.mock.calls[0][0]).toContain('/');
@@ -55,9 +57,14 @@ describe('#AddBot component spec', () => {
 
     it('should notify the user if an error occured', () => {
         wrapper.find('form').trigger('submit');
-        let mockBot = astonomyMocks[0],
-            callback = mockBot.insert.mock.calls[0].pop(),
+
+        expect(insertBot.call.mock.calls.length).to.be(1);
+
+        let insertedBot,
+            callback,
             error = {};
+
+        [insertedBot, callback] = insertBot.call.mock.calls[0];
 
         callback(error);
         expect(wrapper.vm.$notify.mock.calls).toHaveLength(1);

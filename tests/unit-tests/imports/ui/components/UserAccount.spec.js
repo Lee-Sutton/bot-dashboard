@@ -2,9 +2,9 @@
 import {mount} from '@vue/test-utils';
 import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
-import {User} from "../../../../../imports/api/users/users";
+import {User} from "/imports/api/users/users";
 
-import UserAccount from '/imports/ui/components/navbar/UserAccount';
+import UserAccount from '/imports/ui/components/user-accounts/UserAccount';
 
 describe('#UserAccount component spec', () => {
     let wrapper,

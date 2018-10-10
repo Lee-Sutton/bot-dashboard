@@ -1,5 +1,5 @@
 import {assert, expect} from 'chai';
-import {Bot} from './bots.js';
+import {Bot, insertBot, setNotification} from './bots.js';
 import td from 'testdouble';
 import {Meteor} from 'meteor/meteor';
 
@@ -42,7 +42,7 @@ describe('bots collection', function () {
         expect(badInput).to.throw('[validation-error]');
     });
 
-    describe('#insert.bot meteor method', function () {
+    describe('#insertBot meteor method', function () {
         let userId = '234567fjdsakl',
             meteorUser;
 
@@ -58,7 +58,7 @@ describe('bots collection', function () {
         it('should insert the bot', function() {
             let bot = new Bot(dummyBot);
 
-            let botId = bot.insert();
+            let botId = insertBot.call(bot);
 
             expect(botId).to.be.ok;
 
@@ -71,7 +71,7 @@ describe('bots collection', function () {
 
             let invalidCall = () => {
                 let bot = new Bot(dummyBot);
-                bot.insert();
+                insertBot.call(bot);
             };
 
             expect(invalidCall).to.throw;
@@ -79,9 +79,17 @@ describe('bots collection', function () {
     });
 
     describe('#setNotification meteor method', function () {
+        let userId = '234567fjdsakl',
+            meteorUser;
+
+        beforeEach(function () {
+            meteorUser = td.replace(Meteor, 'userId');
+            td.when(meteorUser()).thenReturn(userId)
+        });
+
         it('should update the notification', function () {
             let bot = Bot.findOne({_id: botId});
-            bot.setNotification(true);
+            setNotification.call({bot, notification: true});
 
             let updatedBot = Bot.findOne({_id: botId});
             expect(updatedBot.notification).to.eq(true);

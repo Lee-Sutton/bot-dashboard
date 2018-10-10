@@ -55,6 +55,7 @@ lmieulet:meteor-coverage@2.0.2
 localstorage@1.2.0
 logging@1.1.20
 matb33:collection-hooks@0.8.4
+mdg:validated-method@1.2.0
 mdg:validation-error@0.5.1
 meteor@1.9.2
 meteor-base@1.4.0

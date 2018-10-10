@@ -25,7 +25,7 @@
 
 <script>
     import {Meteor} from 'meteor/meteor';
-    import Login from "./Login";
+    import Login from "../user-accounts/Login";
 
     export default {
         name: "navbar",
