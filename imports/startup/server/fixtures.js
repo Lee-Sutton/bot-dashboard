@@ -33,22 +33,21 @@ Meteor.startup(() => {
 
 Meteor.methods({
     seedTestUsers,
-    resetTestDatabase: (users = testUsers) => {
+    resetTestDatabase: () => {
 
         if (process.env.NODE_ENV !== 'development')
             throw new Meteor.Error('Requires development mode');
 
-        let testUsersEmail = users.map((user) => user.email);
+        let testUsersEmail = testUsers.map((user) => user.email);
 
-        let testUsers = testUsersEmail.map((testUserEmail) => {
+        let users = testUsersEmail.map((testUserEmail) => {
             return Meteor.users.findOne({'emails.address': testUserEmail})
         });
 
-        testUsers.forEach((testUser) => {
-            Bot.remove({userId: testUser._id});
-            BotResults.remove({userId: testUser._id});
+        users.forEach((user) => {
+            Bot.remove({userId: user._id});
+            BotResults.remove({userId: user._id});
+            Meteor.users.remove({_id: user._id})
         });
-
-        Meteor.users.remove({email: {$in: testUsersEmail}});
     }
 });

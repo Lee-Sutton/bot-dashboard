@@ -26,17 +26,19 @@ if (Meteor.isServer) {
             const resetTestDatabase = Meteor.server.method_handlers['resetTestDatabase'];
 
             beforeEach(function () {
+                Meteor.users.remove({});
                 process.env.NODE_ENV = 'development';
                 seedTestUsers();
             });
 
             afterEach(function () {
+                Meteor.users.remove({});
                 process.env.NODE_ENV = 'development';
             });
 
             it('should remove the test users from the database', function () {
                 resetTestDatabase();
-                let users = Meteor.users.find({email: {$in: testUserEmails}});
+                let users = Meteor.users.find({});
                 expect(users.count()).to.eq(0);
             });
             it('should remove all test user data from the database', function () {

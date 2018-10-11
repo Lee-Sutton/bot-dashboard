@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import {Bot} from '/imports/api/bots/bots';
+    import {Bot, setNotification} from '/imports/api/bots/bots';
 
     export default {
         name: 'NotificationModal',
@@ -30,10 +30,10 @@
         },
         methods: {
             saveNotification() {
-                let botId = this.$route.params.id;
-                let bot = Bot.findOne({_id: botId});
+                let botId = this.$route.params.id,
+                    bot = Bot.findOne({_id: botId});
 
-                bot.setNotification(this.notification, (err) => {
+                setNotification.call({bot, notification: this.notification}, (err) => {
                     if (err) {
                         this.$notify({
                             group: 'sAlert',
