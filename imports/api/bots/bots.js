@@ -23,14 +23,12 @@ export const Bot = Class.create({
 
 export const insertBot = new ValidatedMethod({
     name: 'insertBot',
-    validate (bot) {
-        bot.validate();
-    },
+    validate (bot) {},
     run(bot) {
-        if (!Meteor.userId()) {
+        if (!Meteor.user()) {
             throw new Meteor.Error('user not logged in');
         }
-        bot.userId = Meteor.userId();
+        bot.userId = Meteor.user()._id;
         return bot.save();
     }
 });
@@ -39,7 +37,7 @@ export const setNotification = new ValidatedMethod({
     name: 'setNotification',
     validate () {},
     run({bot, notification}) {
-        if (!Meteor.userId()) {
+        if (!Meteor.user()) {
             throw new Meteor.Error('user not logged in');
         }
         bot.notification = notification;

@@ -57,7 +57,7 @@ describe('Application dashboard test suite', function() {
         cy.get('.navbar').contains(newUser.email).should('be.visible');
     });
 
-    it.only('Should allow the user to create bots', function() {
+    it('Should allow the user to create bots', function() {
         // The user visits bots dashboard page
         cy.get('body').contains('Sign in or create an account to get started').should('be.visible');
 

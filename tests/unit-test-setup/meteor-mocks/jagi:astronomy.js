@@ -9,7 +9,11 @@ export const resetAstronomyMocks = () => {
 class AstronomyMock extends Mongo.Collection {
     constructor(params) {
         super();
-        this.params = params;
+
+        for (let key in params) {
+            this[key] = params[key];
+        }
+
         astonomyMocks.push(this);
         this.softRemove = jest.fn();
         this.save = jest.fn();

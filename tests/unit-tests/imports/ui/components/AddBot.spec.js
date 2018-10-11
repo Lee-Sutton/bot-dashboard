@@ -31,7 +31,7 @@ describe('#AddBot component spec', () => {
     it('should store the form inputs as a bot', () => {
         wrapper.find('form').trigger('submit');
 
-        expect(insertBot.call.mock.calls.length).to.be(1);
+        expect(insertBot.call.mock.calls.length).toBe(1);
 
         let insertedBot, callback;
         [insertedBot, callback] = insertBot.call.mock.calls[0];
@@ -46,7 +46,7 @@ describe('#AddBot component spec', () => {
     it('should redirect the user back to the home page', () => {
         wrapper.find('form').trigger('submit');
 
-        expect(insertBot.call.mock.calls.length).to.be(1);
+        expect(insertBot.call.mock.calls.length).toBe(1);
 
         let insertedBot, callback;
         [insertedBot, callback] = insertBot.call.mock.calls[0];
@@ -58,7 +58,7 @@ describe('#AddBot component spec', () => {
     it('should notify the user if an error occured', () => {
         wrapper.find('form').trigger('submit');
 
-        expect(insertBot.call.mock.calls.length).to.be(1);
+        expect(insertBot.call.mock.calls.length).toBe(1);
 
         let insertedBot,
             callback,

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import {Bot} from '/imports/api/bots/bots';
+    import {Bot, insertBot} from '/imports/api/bots/bots';
 
     export default {
         name: "addBot",
@@ -63,7 +63,7 @@
                         minimumScore: parseInt(this.score),
                         description: this.description
                     });
-                bot.insert((err) => {
+                insertBot.call(bot, (err) => {
                     if (err) {
                         this.$notify({
                             group: 'sAlert',

@@ -83,8 +83,8 @@ describe('bots collection', function () {
             meteorUser;
 
         beforeEach(function () {
-            meteorUser = td.replace(Meteor, 'userId');
-            td.when(meteorUser()).thenReturn(userId)
+            meteorUser = td.replace(Meteor, 'user');
+            td.when(meteorUser()).thenReturn({_id: userId})
         });
 
         it('should update the notification', function () {

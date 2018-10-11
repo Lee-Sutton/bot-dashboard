@@ -1,5 +1,5 @@
 
-import {RouterLinkStub, shallowMount} from '@vue/test-utils';
+import {RouterLinkStub, mount} from '@vue/test-utils';
 import {Meteor} from 'meteor/meteor';
 import {Bot} from '/imports/api/bots/bots';
 import '/imports/startup/client/vue-plugins';
@@ -18,22 +18,18 @@ describe('#BotList component spec', () => {
 
     beforeEach(() => {
         jest.resetAllMocks();
-        // The user is logged in
-        Meteor.user.mockReturnValueOnce(true);
         Bot.find.mockReturnValue([bot]);
-
     });
 
     it('it should welcome the user if they are not logged in', () => {
-        Meteor.user.mockReturnValueOnce(undefined);
-
-        let wrapper = shallowMount(BotList, {stubs: {RouterLink: RouterLinkStub}});
-
-        expect(wrapper.html()).toContain('welcome')
+        Meteor.user.mockReturnValue(false);
+        let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
+        expect(wrapper.html()).toContain('Welcome')
     });
 
     it('should show the list of bots if the user is logged in', function () {
-        let wrapper = shallowMount(BotList, {stubs: {RouterLink: RouterLinkStub}}),
+        Meteor.user.mockReturnValue(true);
+        let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}}),
             routerStub = wrapper.findAll(RouterLinkStub);
 
         expect(wrapper.html()).toContain(bot.subreddit);
@@ -46,8 +42,7 @@ describe('#BotList component spec', () => {
     });
 
     it('should allow the user to delete bots', function () {
-        let wrapper = shallowMount(BotList, {stubs: {RouterLink: RouterLinkStub}});
+        let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
         wrapper.find('#delete-bot-1').trigger('click');
-
     });
 });
