@@ -13,12 +13,13 @@ describe('bots collection', function () {
         };
 
     beforeEach(function () {
+        Bot.remove({});
         const bot = new Bot(dummyBot);
 
         botId = bot.save();
     });
 
-    it('insert correctly', function () {
+    it('inserts correctly', function () {
         const added = Bot.find({_id: botId});
         const collectionName = added._getCollectionName();
         const count = added.count();
@@ -47,8 +48,9 @@ describe('bots collection', function () {
             meteorUser;
 
         beforeEach(function () {
-            meteorUser = td.replace(Meteor, 'userId');
-            td.when(meteorUser()).thenReturn(userId)
+            Bot.remove({});
+            meteorUser = td.replace(Meteor, 'user');
+            td.when(meteorUser()).thenReturn({_id: userId})
         });
 
         afterEach(function () {
@@ -83,6 +85,11 @@ describe('bots collection', function () {
             meteorUser;
 
         beforeEach(function () {
+            Bot.remove({});
+            const bot = new Bot(dummyBot);
+
+            botId = bot.save();
+
             meteorUser = td.replace(Meteor, 'user');
             td.when(meteorUser()).thenReturn({_id: userId})
         });

@@ -1,4 +1,4 @@
-import {seedTestUsers, testUsers} from "./fixtures";
+import {seedTestUsers, testUsers, resetTestDatabase} from "./fixtures";
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'chai';
 
@@ -18,6 +18,18 @@ if (Meteor.isServer) {
                 seedTestUsers();
                 let users = Meteor.users.find({});
                 expect(users.count()).to.eq(testUsers.length);
+            });
+        });
+        describe('#reset test database', function () {
+            beforeEach(function () {
+                seedTestUsers();
+            });
+
+            it('should reset the database for the test user only', function () {
+                resetTestDatabase();
+                let testUserEmails = testUsers.map((testUser) => testUser.email);
+                let users = Meteor.users.find({email: {$in: testUserEmails}});
+                expect(users.count()).to.eq(0);
             });
         });
     });

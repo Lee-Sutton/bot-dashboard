@@ -13,6 +13,11 @@ export const testUsers = [
     },
 ];
 
+export const resetTestDatabase = () => {
+    let testUsersEmail = testUsers.map((user) => user.email);
+    Meteor.users.remove({email: {$in: testUsersEmail}});
+};
+
 export const seedTestUsers = () => {
     testUsers.forEach((user) => {
         try {
