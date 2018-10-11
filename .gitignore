@@ -4,3 +4,4 @@ cypress/videos/
 tags
 .idea
 tests/coverage/**
+settings.json

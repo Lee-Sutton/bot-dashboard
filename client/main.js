@@ -7,6 +7,12 @@ import {router} from '/imports/startup/client/routes';
 import AppLayout from '../imports/ui/AppLayout.vue';
 import '/imports/startup/client/vue-plugins';
 
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+Vue.use(BootstrapVue);
+
 Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL',
 });

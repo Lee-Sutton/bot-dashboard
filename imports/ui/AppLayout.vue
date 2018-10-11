@@ -1,8 +1,13 @@
 <template>
     <div id="app">
-        <navbar></navbar>
-        <router-view></router-view>
-        <notifications group="foo" />
+        <div class="mb-4">
+            <navbar></navbar>
+        </div>
+        <div class="container">
+            <router-view></router-view>
+        </div>
+        <notifications group="sAlert"/>
+        <notifications group="auth" position="top" width="100%"/>
     </div>
 </template>
 

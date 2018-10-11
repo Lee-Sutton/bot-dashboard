@@ -7,11 +7,12 @@ import {assert, expect} from 'chai';
 import {BotResult} from './bot-results.js';
 
 if (Meteor.isServer) {
-    describe('bots collection', function() {
+    describe('bots results collection', function() {
         const dummyResults = {
                 url: 'http://dummyurl.com',
                 title: 'description would go here',
-                score: 100
+                score: 100,
+                userId: 'dummyId',
             };
 
         it('insert correctly', function() {

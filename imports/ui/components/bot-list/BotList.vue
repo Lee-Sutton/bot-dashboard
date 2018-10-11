@@ -1,8 +1,9 @@
 <template>
     <div class="app">
         <div v-if="loggedIn" class="container">
-            <router-link class="btn btn-primary" to="/add" data-cy="add-bot">Add Bot</router-link>
-            <br>
+            <div class="mb-4">
+                <router-link class="btn btn-primary" to="/add" data-cy="add-bot">Add Bot</router-link>
+            </div>
             <table class="table table-hover" data-cy="bot-list">
                 <thead>
                 <tr>

@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <button id="run-bot" class="btn btn-primary" @click="runBot">Run Bot</button>
+        <div class="mb-4">
+            <button id="run-bot" class="btn btn-primary" @click="runBot">Run Bot</button>
+            <button id="notifications" class="btn btn-secondary" data-cy="notifications" v-b-modal.notificationModal>Notifications</button>
+        </div>
         <table v-if="results" class="table table-hover" data-cy="bot-list">
             <thead>
             <tr>
@@ -28,14 +31,19 @@
                 <p><em>No data available</em></p>
             </div>
         </div>
+        <notification-modal></notification-modal>
     </div>
 </template>
 
 <script>
     import {Meteor} from 'meteor/meteor';
     import {BotResult} from '/imports/api/bot-results/bot-results.js';
+    import NotificationModal from '../notification-modal/NotificationModal';
 
     export default {
+        components: {
+            NotificationModal
+        },
         name: "ViewBotResults",
         props: ['id'],
         created () {
@@ -44,7 +52,7 @@
         methods: {
             runBot() {
                 Meteor.call('runBot', this.id);
-            }
+            },
         },
         meteor: {
             results () {

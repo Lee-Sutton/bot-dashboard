@@ -19,14 +19,15 @@ const fillAddBotModal = (name, description) => {
     cy.get('[data-cy=add-bot-btn]').click();
 };
 
+
 describe('Application dashboard test suite', function() {
     beforeEach(function () {
-        cy.resetDatabase();
         cy.visit('/');
+        cy.resetDatabase();
         cy.seedTestUsers();
     });
 
-    it('Should greet the user with a dashboard', function() {
+    it('Should allow the user to create bots', function() {
         // The user visits bots dashboard page
         cy.get('body').contains('Sign in or create an account to get started').should('be.visible');
 
@@ -63,6 +64,11 @@ describe('Application dashboard test suite', function() {
         cy.window().then((win) => {
             expect(win.Meteor.call).to.have.been.calledWith('runBot');
         });
+
+        // The user wants to setup email notifications for the bot
+        cy.get('[data-cy=notifications]').click();
+        cy.get('[type=checkbox]').click({force: true});
+        cy.contains('Save').click();
     });
 });
 

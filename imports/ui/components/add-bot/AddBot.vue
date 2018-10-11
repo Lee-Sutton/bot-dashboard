@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import {Meteor} from 'meteor/meteor';
+    import {Bot, insertBot} from '/imports/api/bots/bots';
 
     export default {
         name: "addBot",
@@ -50,30 +50,30 @@
                 name: '',
                 subreddit: '',
                 keyword: '',
-                score: '',
+                score: 0,
                 description: ''
             }
         },
         methods: {
             submitBot() {
-                let bot = {
+                let bot = new Bot({
                         name: this.name,
                         subreddit: this.subreddit,
                         keyword: this.keyword,
-                        minimumScore: this.score,
+                        minimumScore: parseInt(this.score),
                         description: this.description
-                    };
-                Meteor.call('bots.insert', bot, (err) => {
+                    });
+                insertBot.call(bot, (err) => {
                     if (err) {
                         this.$notify({
-                            group: 'foo',
+                            group: 'sAlert',
                             type: 'Danger',
                             title: 'Error adding bot',
                             text: err,
                         });
                     } else {
                         this.$notify({
-                            group: 'foo',
+                            group: 'sAlert',
                             title: 'Bot Added',
                             type: 'success',
                             text: 'Bot added successfully',
