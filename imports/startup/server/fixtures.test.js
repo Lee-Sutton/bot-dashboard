@@ -1,4 +1,4 @@
-import {seedTestUsers, testUsers, resetTestDatabase} from "./fixtures";
+import {seedTestUsers, testUsers} from "./fixtures";
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'chai';
 import {Bot} from '/imports/api/bots/bots';
@@ -23,9 +23,15 @@ if (Meteor.isServer) {
         });
         describe('#reset test database', function () {
             const testUserEmails = testUsers.map((testUser) => testUser.email);
+            const resetTestDatabase = Meteor.server.method_handlers['resetTestDatabase'];
 
             beforeEach(function () {
+                process.env.NODE_ENV = 'development';
                 seedTestUsers();
+            });
+
+            afterEach(function () {
+                process.env.NODE_ENV = 'development';
             });
 
             it('should remove the test users from the database', function () {
@@ -61,6 +67,14 @@ if (Meteor.isServer) {
 
                 let userData = Meteor.users.findOne({_id: nonTestUserId});
                 expect(userData).to.be.ok;
+            });
+            it('should throw if the app is in production mode', function () {
+                process.env.NODE_ENV = 'production';
+                const invalidCall = () => {
+                    resetTestDatabase();
+                };
+
+                expect(invalidCall).to.throw('Requires development mode');
             });
         });
     });

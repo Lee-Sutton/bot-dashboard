@@ -15,21 +15,6 @@ export const testUsers = [
     },
 ];
 
-export const resetTestDatabase = (users = testUsers) => {
-    let testUsersEmail = users.map((user) => user.email);
-
-    let testUsers = testUsersEmail.map((testUserEmail) => {
-        return Meteor.users.findOne({'emails.address': testUserEmail})
-    });
-
-    testUsers.forEach((testUser) => {
-        Bot.remove({userId: testUser._id});
-        BotResults.remove({userId: testUser._id});
-    });
-
-    Meteor.users.remove({email: {$in: testUsersEmail}});
-};
-
 export const seedTestUsers = () => {
     testUsers.forEach((user) => {
         try {
@@ -47,5 +32,23 @@ Meteor.startup(() => {
 
 
 Meteor.methods({
-    seedTestUsers
+    seedTestUsers,
+    resetTestDatabase: (users = testUsers) => {
+
+        if (process.env.NODE_ENV !== 'development')
+            throw new Meteor.Error('Requires development mode');
+
+        let testUsersEmail = users.map((user) => user.email);
+
+        let testUsers = testUsersEmail.map((testUserEmail) => {
+            return Meteor.users.findOne({'emails.address': testUserEmail})
+        });
+
+        testUsers.forEach((testUser) => {
+            Bot.remove({userId: testUser._id});
+            BotResults.remove({userId: testUser._id});
+        });
+
+        Meteor.users.remove({email: {$in: testUsersEmail}});
+    }
 });
