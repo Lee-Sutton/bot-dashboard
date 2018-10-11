@@ -40,9 +40,4 @@ describe('#BotList component spec', () => {
         expect(routerStub.at(1).props().to).toEqual({name: 'results', params: {id: bot._id}});
 
     });
-
-    it('should allow the user to delete bots', function () {
-        let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
-        wrapper.find('#delete-bot-1').trigger('click');
-    });
 });
