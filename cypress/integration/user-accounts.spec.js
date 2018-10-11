@@ -23,7 +23,7 @@ describe('User accounts test suite', function() {
 
     it('should allow the user to create an account', () => {
         let newUser = {
-            email: 'lee@e.com',
+            email: 'lee@mailinator.com',
             password: 'password'
         };
 

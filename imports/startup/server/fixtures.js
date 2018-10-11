@@ -19,7 +19,8 @@ export const seedTestUsers = () => {
     testUsers.forEach((user) => {
         try {
             Accounts.createUser(user);
-        } catch (err) {}
+        } catch (err) {
+        }
     });
 };
 
@@ -34,15 +35,16 @@ Meteor.startup(() => {
 Meteor.methods({
     seedTestUsers,
     resetTestDatabase: () => {
-
         if (process.env.NODE_ENV !== 'development')
             throw new Meteor.Error('Requires development mode');
 
         let testUsersEmail = testUsers.map((user) => user.email);
 
-        let users = testUsersEmail.map((testUserEmail) => {
-            return Meteor.users.findOne({'emails.address': testUserEmail})
-        });
+        let users = testUsersEmail
+            .map((testUserEmail) => {
+                return Meteor.users.findOne({'emails.address': testUserEmail})
+            })
+            .filter((user) => user);
 
         users.forEach((user) => {
             Bot.remove({userId: user._id});

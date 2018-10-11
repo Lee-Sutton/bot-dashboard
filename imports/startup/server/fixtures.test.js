@@ -78,6 +78,10 @@ if (Meteor.isServer) {
 
                 expect(invalidCall).to.throw('Requires development mode');
             });
+            it('can be run if the database is already clean', function () {
+                resetTestDatabase();
+                expect(resetTestDatabase).not.to.throw();
+            });
         });
     });
 }
