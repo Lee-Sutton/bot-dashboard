@@ -31,7 +31,9 @@ Cypress.Commands.add('login', (email = 'john@mailinator.com', password = 'passwo
 });
 
 Cypress.Commands.add('resetDatabase', () => {
-    cy.exec('node ./node_modules/.bin/meteor-cypress drop')
+    cy.window().then((win) => {
+        win.Meteor.call('resetTestDatabase');
+    });
 });
 
 Cypress.Commands.add('seedTestUsers', () => {

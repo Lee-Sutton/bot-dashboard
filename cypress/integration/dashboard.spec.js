@@ -22,8 +22,8 @@ const fillAddBotModal = (name, description) => {
 
 describe('Application dashboard test suite', function() {
     beforeEach(function () {
-        cy.resetDatabase();
         cy.visit('/');
+        cy.resetDatabase();
         cy.seedTestUsers();
     });
 
