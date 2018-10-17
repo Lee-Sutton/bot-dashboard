@@ -13,7 +13,8 @@
 
                     <div class="form-group">
                         <label for="bot-subreddit">Subreddit</label>
-                        <input type="text" class="form-control" name="bot-subreddit" v-model="subreddit" id="bot-subreddit"/>
+                        <input type="text" class="form-control" name="bot-subreddit" v-model="subreddit"
+                               id="bot-subreddit"/>
                     </div>
 
                     <div class="form-group">
@@ -23,11 +24,13 @@
 
                     <div class="form-group">
                         <label for="bot-score">Minimum Score</label>
-                        <input type="number" class="form-control" v-model="minimumScore" name="bot-score" id="bot-score"/>
+                        <input type="number" class="form-control" v-model="minimumScore" name="bot-score"
+                               id="bot-score"/>
                     </div>
                     <div class="form-group">
                         <label for="bot-description">Description</label>
-                        <textarea class="form-control" placeholder="Optional description..." v-model="description" name="bot-description" id="bot-description" rows="3"></textarea>
+                        <textarea class="form-control" placeholder="Optional description..." v-model="description"
+                                  name="bot-description" id="bot-description" rows="3"></textarea>
                     </div>
                 </div>
 
@@ -58,11 +61,29 @@
         },
         methods: {
             submitBot() {
-                let bot = _.pick(this, ['name', 'subreddit', 'keyword', 'minimumScore', 'description']);
+                let fields = ['name', 'subreddit', 'keyword', 'description'],
+                    bot = _.pick(this, fields);
+                bot.minimumScore = parseInt(this.minimumScore);
 
-                if (this._id) {
+                if (this.bot && this.bot._id) {
                     bot._id = this._id;
-                    updateBot.call(bot);
+                    updateBot.call(bot, (err) => {
+                        if (err) {
+                            this.$notify({
+                                group: 'sAlert',
+                                type: 'Danger',
+                                title: 'Error updating bot',
+                                text: err,
+                            });
+                        } else {
+                            this.$notify({
+                                group: 'sAlert',
+                                title: 'Bot updated',
+                                type: 'success',
+                                text: 'Bot updated successfully',
+                            });
+                        }
+                    });
 
                 } else {
                     insertBot.call(new Bot(bot), (err) => {
@@ -82,9 +103,10 @@
                             });
                         }
 
-                        this.$router.push('/');
                     });
                 }
+
+                this.$router.push('/');
             }
         },
     }

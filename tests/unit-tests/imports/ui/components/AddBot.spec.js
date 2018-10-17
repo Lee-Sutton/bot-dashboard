@@ -2,10 +2,12 @@ import {mount} from '@vue/test-utils';
 import toBeType from "jest-tobetype";
 import AddBot from '/imports/ui/components/add-bot/AddBot';
 import {insertBot, updateBot} from '/imports/api/bots/bots';
+import _ from 'lodash';
 
 expect.extend({toBeType});
 
 const dummyBot = {
+    _id: 'dummyBot',
     name: 'test',
     minimumScore: 100,
     subreddit: 'hiphopheads',
@@ -92,7 +94,8 @@ describe('#AddBot component spec', () => {
         });
 
         it('should pre-populate the fields if a bot is supplied', () => {
-            for (let key in dummyBot) {
+            let fields = _.pick(dummyBot, ['name', 'subreddit', 'minimumScore', 'description'])
+            for (let key in fields) {
                 expect(wrapper.vm[key]).toBe(dummyBot[key]);
             }
         });
@@ -100,12 +103,18 @@ describe('#AddBot component spec', () => {
             wrapper.vm._id = 'dummyId';
             wrapper.find('form').trigger('submit');
             expect(updateBot.call.mock.calls.length).toBe(1);
+            expect(wrapper.vm.$router.push.mock.calls[0][0]).toContain('/');
         });
 
-        it('should notify the user if updated successfully', function () {
-            wrapper.vm._id = 'dummyId';
+        it('should notify the user if after updating', function () {
             wrapper.find('form').trigger('submit');
-            expect(updateBot.call.mock.calls.length).toBe(1);
+            let callback = updateBot.call.mock.calls[0][1];
+            callback();
+            expect(wrapper.vm.$notify.mock.calls.length).toBe(1);
+
+            // With error
+            callback({});
+            expect(wrapper.vm.$notify.mock.calls[1][0].type).toBe('Danger');
         });
     });
 });
