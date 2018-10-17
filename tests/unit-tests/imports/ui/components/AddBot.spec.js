@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import toBeType from "jest-tobetype";
 import AddBot from '/imports/ui/components/add-bot/AddBot';
-import {insertBot} from '/imports/api/bots/bots';
+import {insertBot, updateBot} from '/imports/api/bots/bots';
 
 expect.extend({toBeType});
 
@@ -95,6 +95,10 @@ describe('#AddBot component spec', () => {
             for (let key in dummyBot) {
                 expect(wrapper.vm[key]).toBe(dummyBot[key]);
             }
+        });
+        it('should update the supplied bot', function () {
+            wrapper.find('form').trigger('submit');
+            expect(updateBot.call.mock.calls.length).toBe(1);
         });
     });
 });

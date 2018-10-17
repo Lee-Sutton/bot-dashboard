@@ -44,3 +44,15 @@ export const setNotification = new ValidatedMethod({
         return bot.save();
     }
 });
+
+export const updateBot = new ValidatedMethod({
+    name: 'updateBot',
+    validate () {},
+    run (bot) {
+        if (!Meteor.user()) {
+            throw new Meteor.Error('user not logged in');
+        }
+
+        return Bot.update({_id: bot._id}, {$set: bot});
+    }
+});
