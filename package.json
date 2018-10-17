@@ -20,6 +20,7 @@
     "cls-bluebird": "^2.1.0",
     "jest": "^23.5.0",
     "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
     "meteor-node-stubs": "^0.3.2",
     "moment": "^2.22.2",
     "snoostorm": "0.0.5",

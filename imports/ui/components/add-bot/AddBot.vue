@@ -41,7 +41,8 @@
 </template>
 
 <script>
-    import {Bot, insertBot} from '/imports/api/bots/bots';
+    import {Bot, insertBot, updateBot} from '/imports/api/bots/bots';
+    import _ from 'lodash'
 
     export default {
         name: "addBot",
@@ -57,32 +58,33 @@
         },
         methods: {
             submitBot() {
-                let bot = new Bot({
-                        name: this.name,
-                        subreddit: this.subreddit,
-                        keyword: this.keyword,
-                        minimumScore: parseInt(this.minimumScore),
-                        description: this.description
-                    });
-                insertBot.call(bot, (err) => {
-                    if (err) {
-                        this.$notify({
-                            group: 'sAlert',
-                            type: 'Danger',
-                            title: 'Error adding bot',
-                            text: err,
-                        });
-                    } else {
-                        this.$notify({
-                            group: 'sAlert',
-                            title: 'Bot Added',
-                            type: 'success',
-                            text: 'Bot added successfully',
-                        });
-                    }
+                let bot = _.pick(this, ['name', 'subreddit', 'keyword', 'minimumScore', 'description']);
 
-                    this.$router.push('/');
-                });
+                if (this._id) {
+                    bot._id = this._id;
+                    updateBot.call(bot);
+
+                } else {
+                    insertBot.call(new Bot(bot), (err) => {
+                        if (err) {
+                            this.$notify({
+                                group: 'sAlert',
+                                type: 'Danger',
+                                title: 'Error adding bot',
+                                text: err,
+                            });
+                        } else {
+                            this.$notify({
+                                group: 'sAlert',
+                                title: 'Bot Added',
+                                type: 'success',
+                                text: 'Bot added successfully',
+                            });
+                        }
+
+                        this.$router.push('/');
+                    });
+                }
             }
         },
     }

@@ -97,6 +97,13 @@ describe('#AddBot component spec', () => {
             }
         });
         it('should update the supplied bot', function () {
+            wrapper.vm._id = 'dummyId';
+            wrapper.find('form').trigger('submit');
+            expect(updateBot.call.mock.calls.length).toBe(1);
+        });
+
+        it('should notify the user if updated successfully', function () {
+            wrapper.vm._id = 'dummyId';
             wrapper.find('form').trigger('submit');
             expect(updateBot.call.mock.calls.length).toBe(1);
         });
