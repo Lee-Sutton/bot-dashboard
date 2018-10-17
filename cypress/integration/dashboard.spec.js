@@ -41,6 +41,10 @@ describe('Application dashboard test suite', function() {
         cy.url().should('contain', 'add');
         fillAddBotModal('New Bot', 'New Bot Description');
 
+        // The user decides to edit the bot
+        cy.get('[data-cy=edit-bot-1]').click();
+        cy.get('#edit-bot').should('be.visible');
+
         // After clicking submit they see that the new bot is in the bot list
         cy.get('[data-cy=bot-list]').contains('New Bot').should('be.visible');
         cy.get('[data-cy=bot-list]').contains('hiphopheads').should('be.visible');

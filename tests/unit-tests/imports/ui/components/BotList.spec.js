@@ -38,6 +38,7 @@ describe('#BotList component spec', () => {
         expect(wrapper.html()).toContain(bot.name);
         expect(routerStub.at(0).props().to).toBe('/add');
         expect(routerStub.at(1).props().to).toEqual({name: 'results', params: {id: bot._id}});
+        expect(routerStub.at(2).props().to).toEqual({name: 'add', params: {bot}});
 
     });
 });

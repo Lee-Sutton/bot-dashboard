@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <label for="bot-score">Minimum Score</label>
-                        <input type="number" class="form-control" v-model="score" name="bot-score" id="bot-score"/>
+                        <input type="number" class="form-control" v-model="minimumScore" name="bot-score" id="bot-score"/>
                     </div>
                     <div class="form-group">
                         <label for="bot-description">Description</label>
@@ -45,12 +45,13 @@
 
     export default {
         name: "addBot",
+        props: ['bot'],
         data() {
-            return {
+            return this.bot || {
                 name: '',
                 subreddit: '',
                 keyword: '',
-                score: 0,
+                minimumScore: 0,
                 description: ''
             }
         },
@@ -60,7 +61,7 @@
                         name: this.name,
                         subreddit: this.subreddit,
                         keyword: this.keyword,
-                        minimumScore: parseInt(this.score),
+                        minimumScore: parseInt(this.minimumScore),
                         description: this.description
                     });
                 insertBot.call(bot, (err) => {

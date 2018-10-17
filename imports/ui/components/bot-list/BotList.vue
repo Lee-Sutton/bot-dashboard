@@ -12,9 +12,10 @@
                     <td>Subreddit</td>
                     <td>Keywords</td>
                     <td>Min Score</td>
+                    <td>Actions</td>
                 </tr>
                 </thead>
-                <tbody v-for="bot in bots">
+                <tbody v-for="(bot, index) in bots">
                 <tr>
                     <th scope="row">
                     </th>
@@ -24,6 +25,9 @@
                     <td>{{bot.subreddit}}</td>
                     <td>{{bot.keyword}}</td>
                     <td>{{bot.minimumScore}}</td>
+                    <td>
+                        <router-link :to="{name: 'add', params: {bot}}" class="btn btn-secondary">Edit</router-link>
+                    </td>
                 </tr>
                 </tbody>
             </table>
