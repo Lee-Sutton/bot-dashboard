@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="">
-                    <button data-cy="add-bot-btn" type="submit" class="btn btn-primary">Add</button>
+                    <button data-cy="add-bot-btn" type="submit" class="btn btn-primary float-right mb-2">Save</button>
                 </div>
             </div>
         </form>
