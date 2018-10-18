@@ -35,7 +35,7 @@ describe('Application dashboard test suite', function() {
         cy.login();
 
         // They want to add a new bot
-        cy.get('[data-cy=add-bot]').click({force: true});
+        cy.get('[data-cy=add-bot]').click({force: true, timeout: 10000});
 
         // The user is directed to an add bot url
         cy.url().should('contain', 'add');

@@ -7,7 +7,7 @@
     "test:client": "jest --config tests/unit-test-setup/jest-config.js",
     "test:server": "meteor test --once --driver-package meteortesting:mocha --port 4000",
     "test:server-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --browser chrome",
     "cypress:open": "node_modules/.bin/cypress open",
     "test:e2e": "start-server-and-test start http://localhost:3000 cypress:open",
     "test:e2e:CI": "start-server-and-test start http://localhost:3000 cypress:run"
