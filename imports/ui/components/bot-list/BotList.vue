@@ -12,6 +12,7 @@
                     <td>Subreddit</td>
                     <td>Keywords</td>
                     <td>Min Score</td>
+                    <td>Actions</td>
                 </tr>
                 </thead>
                 <tbody v-for="bot in bots">
@@ -20,10 +21,14 @@
                     </th>
                     <td>
                         <router-link :to="{name: 'results', params: {id: bot._id}}">{{bot.name}}</router-link>
+                        <p><em>Hits: {{bot.results().count()}}</em></p>
                     </td>
                     <td>{{bot.subreddit}}</td>
                     <td>{{bot.keyword}}</td>
                     <td>{{bot.minimumScore}}</td>
+                    <td>
+                        <router-link :to="{name: 'add', params: {bot}}" class="btn btn-secondary">Edit</router-link>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -45,7 +50,8 @@
         },
         meteor: {
             $subscribe: {
-                'bots.all': []
+                'bots.all': [],
+                'botResultCount': [],
             },
             bots() {
                 return Bot.find({});

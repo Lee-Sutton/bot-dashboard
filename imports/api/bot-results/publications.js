@@ -1,7 +1,16 @@
 import { Meteor } from 'meteor/meteor';
-import { BotResults } from '/imports/api/bot-results/bot-results.js';
+import { BotResult } from '/imports/api/bot-results/bot-results.js';
 
 Meteor.publish('botResults', function (botId) {
-    if (!this.userId) this.ready();
-    return BotResults.find({botId});
+    if (this.userId)
+        return BotResult.find({botId});
+
+    this.ready();
+});
+
+Meteor.publish('botResultCount', function () {
+    if (this.userId)
+        return BotResult.find({userId: this.userId}, {fields: {_id: 1, botId: 1}});
+
+    this.ready();
 });

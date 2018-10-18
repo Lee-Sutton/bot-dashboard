@@ -13,7 +13,8 @@
 
                     <div class="form-group">
                         <label for="bot-subreddit">Subreddit</label>
-                        <input type="text" class="form-control" name="bot-subreddit" v-model="subreddit" id="bot-subreddit"/>
+                        <input type="text" class="form-control" name="bot-subreddit" v-model="subreddit"
+                               id="bot-subreddit"/>
                     </div>
 
                     <div class="form-group">
@@ -23,16 +24,18 @@
 
                     <div class="form-group">
                         <label for="bot-score">Minimum Score</label>
-                        <input type="number" class="form-control" v-model="score" name="bot-score" id="bot-score"/>
+                        <input type="number" class="form-control" v-model="minimumScore" name="bot-score"
+                               id="bot-score"/>
                     </div>
                     <div class="form-group">
                         <label for="bot-description">Description</label>
-                        <textarea class="form-control" placeholder="Optional description..." v-model="description" name="bot-description" id="bot-description" rows="3"></textarea>
+                        <textarea class="form-control" placeholder="Optional description..." v-model="description"
+                                  name="bot-description" id="bot-description" rows="3"></textarea>
                     </div>
                 </div>
 
                 <div class="">
-                    <button data-cy="add-bot-btn" type="submit" class="btn btn-primary">Add</button>
+                    <button data-cy="add-bot-btn" type="submit" class="btn btn-primary float-right mb-2">Save</button>
                 </div>
             </div>
         </form>
@@ -41,47 +44,69 @@
 </template>
 
 <script>
-    import {Bot, insertBot} from '/imports/api/bots/bots';
+    import {Bot, insertBot, updateBot} from '/imports/api/bots/bots';
+    import _ from 'lodash'
 
     export default {
         name: "addBot",
+        props: ['bot'],
         data() {
-            return {
+            return this.bot || {
                 name: '',
                 subreddit: '',
                 keyword: '',
-                score: 0,
+                minimumScore: 0,
                 description: ''
             }
         },
         methods: {
             submitBot() {
-                let bot = new Bot({
-                        name: this.name,
-                        subreddit: this.subreddit,
-                        keyword: this.keyword,
-                        minimumScore: parseInt(this.score),
-                        description: this.description
-                    });
-                insertBot.call(bot, (err) => {
-                    if (err) {
-                        this.$notify({
-                            group: 'sAlert',
-                            type: 'Danger',
-                            title: 'Error adding bot',
-                            text: err,
-                        });
-                    } else {
-                        this.$notify({
-                            group: 'sAlert',
-                            title: 'Bot Added',
-                            type: 'success',
-                            text: 'Bot added successfully',
-                        });
-                    }
+                let fields = ['name', 'subreddit', 'keyword', 'description'],
+                    bot = _.pick(this, fields);
+                bot.minimumScore = parseInt(this.minimumScore);
 
-                    this.$router.push('/');
-                });
+                if (this.bot && this.bot._id) {
+                    bot._id = this.bot._id;
+                    updateBot.call(bot, (err) => {
+                        if (err) {
+                            this.$notify({
+                                group: 'sAlert',
+                                type: 'Danger',
+                                title: 'Error updating bot',
+                                text: err,
+                            });
+                        } else {
+                            this.$notify({
+                                group: 'sAlert',
+                                title: 'Bot updated',
+                                type: 'success',
+                                text: 'Bot updated successfully',
+                            });
+                        }
+                    });
+
+                } else {
+                    insertBot.call(new Bot(bot), (err) => {
+                        if (err) {
+                            this.$notify({
+                                group: 'sAlert',
+                                type: 'Danger',
+                                title: 'Error adding bot',
+                                text: err,
+                            });
+                        } else {
+                            this.$notify({
+                                group: 'sAlert',
+                                title: 'Bot Added',
+                                type: 'success',
+                                text: 'Bot added successfully',
+                            });
+                        }
+
+                    });
+                }
+
+                this.$router.push('/');
             }
         },
     }

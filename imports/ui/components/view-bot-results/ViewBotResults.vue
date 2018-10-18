@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="mb-4">
-            <button id="run-bot" class="btn btn-primary" @click="runBot">Run Bot</button>
-            <button id="notifications" class="btn btn-secondary" data-cy="notifications" v-b-modal.notificationModal>Notifications</button>
+            <button id="run-bot" class="btn btn-primary mb-2 mr-1" @click="runBot">Run Bot</button>
+            <button id="notifications" class="btn btn-secondary mb-2 mr-1" data-cy="notifications" v-b-modal.notificationModal>Notifications</button>
         </div>
         <table v-if="results" class="table table-hover" data-cy="bot-list">
             <thead>

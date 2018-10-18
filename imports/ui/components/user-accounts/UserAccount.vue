@@ -8,7 +8,7 @@
         <div v-else>
             <b-nav-item v-b-modal.loginModal id="login-sign-in-link">{{userState}}</b-nav-item>
         </div>
-        <b-modal id="loginModal" ref="loginModalRef" title="Login" @ok="handleOk">
+        <b-modal @keydown.native.enter="handleOk" id="loginModal" ref="loginModalRef" title="Login" @ok="handleOk">
             <div class="d-block">
                 <div v-if="newUser">
                     <b-form ref="form" @submit.prevent="createUser">

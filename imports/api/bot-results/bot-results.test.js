@@ -7,15 +7,16 @@ import {assert, expect} from 'chai';
 import {BotResult} from './bot-results.js';
 
 if (Meteor.isServer) {
-    describe('bots results collection', function() {
+    describe('bots results collection', function () {
         const dummyResults = {
-                url: 'http://dummyurl.com',
-                title: 'description would go here',
-                score: 100,
-                userId: 'dummyId',
-            };
+            url: 'http://dummyurl.com',
+            title: 'description would go here',
+            score: 100,
+            userId: 'dummyId',
+            botId: 'dummyBotId',
+        };
 
-        it('insert correctly', function() {
+        it('insert correctly', function () {
             const _id = BotResult.insert(dummyResults);
 
             const added = BotResult.find({_id});

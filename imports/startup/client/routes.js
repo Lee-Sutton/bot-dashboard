@@ -18,6 +18,7 @@ const routes = [
         path: '/add',
         name: 'add',
         component: AddBot,
+        props: true,
     },
     {
         path: '/results/:id',

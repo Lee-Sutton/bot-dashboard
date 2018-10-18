@@ -31,7 +31,6 @@ describe('NotificationModalSpec', () => {
 
         wrapper.vm.saveNotification();
 
-        expect(setNotification.call.mock.calls.length).toBe(1);
-        // expect(typeof setNotification.mock.calls[0][0].notification).toBe('boolean');
+        expect(setNotification.call).toBeCalled();
     });
 });

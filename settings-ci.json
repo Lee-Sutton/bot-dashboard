@@ -1,0 +1,9 @@
+{
+  "private": {
+    "sendgrid": {
+      "key": "dummyKey",
+      "username": "lee-sutton",
+      "password": "password"
+    }
+  }
+}

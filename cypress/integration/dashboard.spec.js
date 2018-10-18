@@ -10,12 +10,12 @@ const checkAddBotModal = () => {
 /**
  * Fills in the addBotModal with the input information
  */
-const fillAddBotModal = (name, description) => {
-    cy.get('#bot-name').type(name);
-    cy.get('#bot-subreddit').type('hiphopheads');
-    cy.get('#bot-keyword').type('FRESH');
-    cy.get('#bot-score').type('100');
-    cy.get('#bot-description').type(description);
+const fillAddBotModal = (name, description, subreddit='hiphopheads') => {
+    cy.get('#bot-name').clear().type(name);
+    cy.get('#bot-subreddit').clear().type(subreddit);
+    cy.get('#bot-keyword').clear().type('FRESH');
+    cy.get('#bot-score').clear().type('100');
+    cy.get('#bot-description').clear().type(description);
     cy.get('[data-cy=add-bot-btn]').click();
 };
 
@@ -35,7 +35,7 @@ describe('Application dashboard test suite', function() {
         cy.login();
 
         // They want to add a new bot
-        cy.get('[data-cy=add-bot]').click({force: true});
+        cy.get('[data-cy=add-bot]').click({force: true, timeout: 10000});
 
         // The user is directed to an add bot url
         cy.url().should('contain', 'add');
@@ -46,6 +46,14 @@ describe('Application dashboard test suite', function() {
         cy.get('[data-cy=bot-list]').contains('hiphopheads').should('be.visible');
         cy.get('[data-cy=bot-list]').contains('100').should('be.visible');
         cy.get('[data-cy=bot-list]').contains('FRESH').should('be.visible');
+
+        // The user decides to edit the bot
+        cy.contains('Edit').click();
+        cy.get('[data-cy=add-bot]').should('be.visible');
+        fillAddBotModal('New Bot', 'Edited description', 'editedsubreddit');
+
+        // The user sees the updated results
+        cy.get('.table').contains('editedsubreddit').should('be.visible');
 
         // The user clicks the listed bot
         cy.get('.table').contains('New Bot').click();

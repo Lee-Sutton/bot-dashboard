@@ -14,6 +14,11 @@ describe('#BotList component spec', () => {
         minimumScore: 100,
         _id: 'dummyId',
         remove: jest.fn(),
+        results() {
+            return {
+              count: jest.fn().mockReturnValue(10)
+            }
+        }
     };
 
     beforeEach(() => {
@@ -27,6 +32,12 @@ describe('#BotList component spec', () => {
         expect(wrapper.html()).toContain('Welcome')
     });
 
+    it('should subscribe to bots.all and botResultsCount', function () {
+        mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
+        expect(Meteor.mockSubscribe).toBeCalledWith('bots.all');
+        expect(Meteor.mockSubscribe).toBeCalledWith('botResultCount');
+    });
+
     it('should show the list of bots if the user is logged in', function () {
         Meteor.user.mockReturnValue(true);
         let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}}),
@@ -36,8 +47,10 @@ describe('#BotList component spec', () => {
         expect(wrapper.html()).toContain(bot.keyword);
         expect(wrapper.html()).toContain(bot.minimumScore);
         expect(wrapper.html()).toContain(bot.name);
+        expect(wrapper.html()).toContain(bot.results().count());
         expect(routerStub.at(0).props().to).toBe('/add');
         expect(routerStub.at(1).props().to).toEqual({name: 'results', params: {id: bot._id}});
+        expect(routerStub.at(2).props().to).toEqual({name: 'add', params: {bot}});
 
     });
 });

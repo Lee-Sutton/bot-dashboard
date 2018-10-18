@@ -1,6 +1,7 @@
 import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
+import {BotResult} from '../bot-results/bot-results';
 
 export const Bots = new Mongo.Collection('bots');
 
@@ -19,6 +20,11 @@ export const Bot = Class.create({
             default: false,
         }
     },
+    helpers: {
+        results () {
+            return BotResult.find({botId: this._id});
+        }
+    }
 });
 
 export const insertBot = new ValidatedMethod({
@@ -42,5 +48,17 @@ export const setNotification = new ValidatedMethod({
         }
         bot.notification = notification;
         return bot.save();
+    }
+});
+
+export const updateBot = new ValidatedMethod({
+    name: 'updateBot',
+    validate () {},
+    run (bot) {
+        if (!Meteor.user()) {
+            throw new Meteor.Error('user not logged in');
+        }
+
+        return Bot.update({_id: bot._id}, {$set: bot});
     }
 });

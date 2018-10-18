@@ -1,7 +1,17 @@
 import {assert, expect} from 'chai';
-import {Bot, insertBot, setNotification} from './bots.js';
+import {Bot, insertBot, setNotification, updateBot} from './bots.js';
 import td from 'testdouble';
 import {Meteor} from 'meteor/meteor';
+import {BotResults} from "../bot-results/bot-results";
+
+const botFixture = () => {
+    return {
+        name: 'test bot',
+        subreddit: 'dummySubreddit',
+        keyword: 'dummy keyword',
+        userId: 'dummyId',
+    }
+};
 
 describe('bots collection', function () {
     let botId,
@@ -11,6 +21,13 @@ describe('bots collection', function () {
             keyword: 'dummy keyword',
             userId: 'dummyId',
         };
+
+    let dummyResults = {
+        url: 'http://dummyurl.com',
+        title: 'description would go here',
+        score: 100,
+        userId: 'dummyId',
+    };
 
     beforeEach(function () {
         Bot.remove({});
@@ -41,6 +58,23 @@ describe('bots collection', function () {
             bot.save();
         };
         expect(badInput).to.throw('[validation-error]');
+    });
+
+    describe('#results helper', function () {
+        it('it should return the related results', function () {
+            BotResults.insert({
+                ...dummyResults,
+                botId,
+            });
+
+            const bot = Bot.findOne({_id: botId});
+            let results = bot.results();
+            expect(results).to.be.ok;
+
+            let botResult = results.fetch()[0];
+            expect(botResult.url).to.eq(dummyResults.url);
+            expect(botResult.botId).to.eq(botId);
+        });
     });
 
     describe('#insertBot meteor method', function () {
@@ -74,6 +108,50 @@ describe('bots collection', function () {
             let invalidCall = () => {
                 let bot = new Bot(dummyBot);
                 insertBot.call(bot);
+            };
+
+            expect(invalidCall).to.throw;
+        });
+    });
+
+
+    describe('#updateBot meteor method', function () {
+        let userId = '234567fjdsakl',
+            meteorUser,
+            botId;
+
+        beforeEach(function () {
+            Bot.remove({});
+            meteorUser = td.replace(Meteor, 'user');
+            td.when(meteorUser()).thenReturn({_id: userId});
+
+            botId = Bot.insert(botFixture());
+        });
+
+        afterEach(function () {
+            td.reset();
+        });
+
+        it('should update the bot', function() {
+            let bot = botFixture();
+
+            bot._id = botId;
+            bot.name = 'new name';
+
+            let output = updateBot.call(bot);
+
+            expect(output).to.be.ok;
+
+            let updatedBot = Bot.findOne({_id: botId});
+            expect(updatedBot.name).to.eq(bot.name);
+        });
+
+        it('Throws if the user is not logged in', function() {
+            td.when(meteorUser()).thenReturn(undefined);
+
+            let invalidCall = () => {
+                let bot = new Bot(dummyBot);
+                updateBot.call(bot);
             };
 
             expect(invalidCall).to.throw;
