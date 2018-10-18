@@ -35,6 +35,7 @@ describe('#BotList component spec', () => {
     it('should subscribe to bots.all and botResultsCount', function () {
         mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
         expect(Meteor.mockSubscribe).toBeCalledWith('bots.all');
+        expect(Meteor.mockSubscribe).toBeCalledWith('botResultCount');
     });
 
     it('should show the list of bots if the user is logged in', function () {

@@ -51,7 +51,7 @@
         meteor: {
             $subscribe: {
                 'bots.all': [],
-                // FIXME this should subscribe to botResultCount
+                'botResultCount': [],
             },
             bots() {
                 return Bot.find({});
