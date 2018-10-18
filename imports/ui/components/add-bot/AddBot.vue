@@ -66,7 +66,7 @@
                 bot.minimumScore = parseInt(this.minimumScore);
 
                 if (this.bot && this.bot._id) {
-                    bot._id = this._id;
+                    bot._id = this.bot._id;
                     updateBot.call(bot, (err) => {
                         if (err) {
                             this.$notify({

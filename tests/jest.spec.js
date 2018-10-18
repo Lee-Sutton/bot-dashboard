@@ -11,7 +11,7 @@ describe('jest smoke test', function () {
     it('should mock meteor calls', function() {
         let args = 'dummyArg';
         meteorCall(args);
-        expect(Meteor.call.mock.calls.length).toBe(1);
+        expect(Meteor.call).toBeCalled();
         expect(Meteor.call.mock.calls[0]).toContain(args);
     });
 

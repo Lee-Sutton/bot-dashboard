@@ -11,6 +11,7 @@ export const BotResult = Class.create({
         url: String,
         title: String,
         score: {type: Number, default: 0},
-        userId: {type: String, default: null}
+        userId: {type: String, default: null},
+        botId: String
     }
 });

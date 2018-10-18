@@ -10,9 +10,9 @@ const checkAddBotModal = () => {
 /**
  * Fills in the addBotModal with the input information
  */
-const fillAddBotModal = (name, description) => {
+const fillAddBotModal = (name, description, subreddit='hiphopheads') => {
     cy.get('#bot-name').clear().type(name);
-    cy.get('#bot-subreddit').clear().type('hiphopheads');
+    cy.get('#bot-subreddit').clear().type(subreddit);
     cy.get('#bot-keyword').clear().type('FRESH');
     cy.get('#bot-score').clear().type('100');
     cy.get('#bot-description').clear().type(description);
@@ -47,11 +47,13 @@ describe('Application dashboard test suite', function() {
         cy.get('[data-cy=bot-list]').contains('100').should('be.visible');
         cy.get('[data-cy=bot-list]').contains('FRESH').should('be.visible');
 
-
         // The user decides to edit the bot
         cy.contains('Edit').click();
         cy.get('[data-cy=add-bot]').should('be.visible');
-        fillAddBotModal('New Bot', 'New Bot Description');
+        fillAddBotModal('New Bot', 'Edited description', 'editedsubreddit');
+
+        // The user sees the updated results
+        cy.get('.table').contains('editedsubreddit').should('be.visible');
 
         // The user clicks the listed bot
         cy.get('.table').contains('New Bot').click();

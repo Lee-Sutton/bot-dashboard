@@ -49,7 +49,7 @@ describe('#UserAccount component spec', () => {
         wrapper.vm.$notify = jest.fn();
 
         callback({});
-        expect(wrapper.vm.$notify.mock.calls.length).toBe(1);
+        expect(wrapper.vm.$notify).toBeCalled();
         callback();
     });
 
@@ -57,7 +57,7 @@ describe('#UserAccount component spec', () => {
         Meteor.user.mockReturnValue(true);
         wrapper = mount(UserAccount);
         wrapper.find('#logout').trigger('click');
-        expect(Meteor.logout.mock.calls.length).toBe(1);
+        expect(Meteor.logout).toBeCalled();
     });
 
     it('should allow the user to create an account', function () {
@@ -74,13 +74,13 @@ describe('#UserAccount component spec', () => {
 
         wrapper.vm.handleOk({preventDefault: () => {}});
 
-        expect(Accounts.createUser.mock.calls.length).toBe(1);
+        expect(Accounts.createUser).toBeCalled();
 
         let callback = Accounts.createUser.mock.calls[0][1];
         wrapper.vm.$notify = jest.fn();
 
         callback({});
-        expect(wrapper.vm.$notify.mock.calls.length).toBe(1);
+        expect(wrapper.vm.$notify).toBeCalled();
         callback();
     });
 });

@@ -15,7 +15,9 @@ const Meteor = {
     wrapAsync: jest.fn(),
     Error: jest.fn(Error),
     publications: {},
+    mockSubscribe: jest.fn(),
     subscribe (name) {
+        this.mockSubscribe(name);
         return this.publications[name]
     },
     publish (name) {

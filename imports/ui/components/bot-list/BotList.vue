@@ -15,12 +15,13 @@
                     <td>Actions</td>
                 </tr>
                 </thead>
-                <tbody v-for="(bot, index) in bots">
+                <tbody v-for="bot in bots">
                 <tr>
                     <th scope="row">
                     </th>
                     <td>
                         <router-link :to="{name: 'results', params: {id: bot._id}}">{{bot.name}}</router-link>
+                        <p><em>Hits: {{bot.results().count()}}</em></p>
                     </td>
                     <td>{{bot.subreddit}}</td>
                     <td>{{bot.keyword}}</td>
@@ -49,7 +50,8 @@
         },
         meteor: {
             $subscribe: {
-                'bots.all': []
+                'bots.all': [],
+                // FIXME this should subscribe to botResultCount
             },
             bots() {
                 return Bot.find({});

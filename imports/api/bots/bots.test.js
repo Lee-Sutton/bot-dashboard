@@ -2,6 +2,7 @@ import {assert, expect} from 'chai';
 import {Bot, insertBot, setNotification, updateBot} from './bots.js';
 import td from 'testdouble';
 import {Meteor} from 'meteor/meteor';
+import {BotResults} from "../bot-results/bot-results";
 
 const botFixture = () => {
     return {
@@ -20,6 +21,13 @@ describe('bots collection', function () {
             keyword: 'dummy keyword',
             userId: 'dummyId',
         };
+
+    let dummyResults = {
+        url: 'http://dummyurl.com',
+        title: 'description would go here',
+        score: 100,
+        userId: 'dummyId',
+    };
 
     beforeEach(function () {
         Bot.remove({});
@@ -50,6 +58,23 @@ describe('bots collection', function () {
             bot.save();
         };
         expect(badInput).to.throw('[validation-error]');
+    });
+
+    describe('#results helper', function () {
+        it('it should return the related results', function () {
+            BotResults.insert({
+                ...dummyResults,
+                botId,
+            });
+
+            const bot = Bot.findOne({_id: botId});
+            let results = bot.results();
+            expect(results).to.be.ok;
+
+            let botResult = results.fetch()[0];
+            expect(botResult.url).to.eq(dummyResults.url);
+            expect(botResult.botId).to.eq(botId);
+        });
     });
 
     describe('#insertBot meteor method', function () {

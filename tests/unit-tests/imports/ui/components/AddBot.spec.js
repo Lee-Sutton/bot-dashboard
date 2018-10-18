@@ -40,7 +40,7 @@ describe('#AddBot component spec', () => {
         it('should store the form inputs as a bot', () => {
             wrapper.find('form').trigger('submit');
 
-            expect(insertBot.call.mock.calls.length).toBe(1);
+            expect(insertBot.call).toBeCalled();
 
             let insertedBot, callback;
             [insertedBot, callback] = insertBot.call.mock.calls[0];
@@ -55,7 +55,7 @@ describe('#AddBot component spec', () => {
         it('should redirect the user back to the home page', () => {
             wrapper.find('form').trigger('submit');
 
-            expect(insertBot.call.mock.calls.length).toBe(1);
+            expect(insertBot.call).toBeCalled();
 
             let insertedBot, callback;
             [insertedBot, callback] = insertBot.call.mock.calls[0];
@@ -67,7 +67,7 @@ describe('#AddBot component spec', () => {
         it('should notify the user if an error occurred', () => {
             wrapper.find('form').trigger('submit');
 
-            expect(insertBot.call.mock.calls.length).toBe(1);
+            expect(insertBot.call).toBeCalled();
 
             let insertedBot,
                 callback,
@@ -100,9 +100,13 @@ describe('#AddBot component spec', () => {
             }
         });
         it('should update the supplied bot', function () {
-            wrapper.vm._id = 'dummyId';
             wrapper.find('form').trigger('submit');
-            expect(updateBot.call.mock.calls.length).toBe(1);
+            expect(updateBot.call).toBeCalled();
+
+            let updatedBot = updateBot.call.mock.calls[0][0];
+
+            expect(updatedBot._id).toBeDefined();
+
             expect(wrapper.vm.$router.push.mock.calls[0][0]).toContain('/');
         });
 
@@ -110,7 +114,7 @@ describe('#AddBot component spec', () => {
             wrapper.find('form').trigger('submit');
             let callback = updateBot.call.mock.calls[0][1];
             callback();
-            expect(wrapper.vm.$notify.mock.calls.length).toBe(1);
+            expect(wrapper.vm.$notify).toBeCalled();
 
             // With error
             callback({});
