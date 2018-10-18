@@ -3,11 +3,11 @@
   "private": true,
   "scripts": {
     "test": "npm run test:client && npm run test:server && npm run test:e2e:CI",
-    "start": "meteor run --settings settings.json",
+    "start": "meteor run",
     "test:client": "jest --config tests/unit-test-setup/jest-config.js",
     "test:server": "meteor test --once --driver-package meteortesting:mocha --port 4000",
     "test:server-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000",
-    "cypress:run": "cypress run --browser chrome",
+    "cypress:run": "cypress run",
     "cypress:open": "node_modules/.bin/cypress open",
     "test:e2e": "start-server-and-test start http://localhost:3000 cypress:open",
     "test:e2e:CI": "start-server-and-test start http://localhost:3000 cypress:run"
