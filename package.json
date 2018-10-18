@@ -2,13 +2,15 @@
   "name": "bot-dashboard",
   "private": true,
   "scripts": {
-    "test": "npm run test:unit && npm run test:integration && npm run cypress",
-    "cypress": "node_modules/.bin/cypress run",
-    "cypress:open": "node_modules/.bin/cypress open",
+    "test": "npm run test:client && npm run test:server && npm run test:e2e:CI",
     "start": "meteor run --settings settings.json",
     "test:client": "jest --config tests/unit-test-setup/jest-config.js",
     "test:server": "meteor test --once --driver-package meteortesting:mocha --port 4000",
-    "test:server-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000"
+    "test:server-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha --port 4000",
+    "cypress:run": "cypress run --browser chrome",
+    "cypress:open": "node_modules/.bin/cypress open",
+    "test:e2e": "start-server-and-test start http://localhost:3000 cypress:open",
+    "test:e2e:CI": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.42",
@@ -25,6 +27,7 @@
     "moment": "^2.22.2",
     "snoostorm": "0.0.5",
     "snoowrap": "^1.15.2",
+    "start-server-and-test": "^1.7.4",
     "utf-8-validate": "^5.0.1",
     "vue": "^2.5.17",
     "vue-meta": "^1.5.3",
@@ -41,7 +44,6 @@
     "chai": "^4.1.2",
     "cypress": "^3.0.1",
     "jest-tobetype": "^1.2.0",
-    "meteor-cypress": "file:../meteor-cypress",
     "mocha": "^5.2.0",
     "sinon": "^6.1.3",
     "testdouble": "^3.8.1",
