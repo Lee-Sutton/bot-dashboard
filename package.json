@@ -29,6 +29,7 @@
     "snoowrap": "^1.15.2",
     "start-server-and-test": "^1.7.4",
     "utf-8-validate": "^5.0.1",
+    "vee-validate": "^2.1.0-beta.11",
     "vue": "^2.5.17",
     "vue-meta": "^1.5.3",
     "vue-meteor-tracker": "^1.0.3",
