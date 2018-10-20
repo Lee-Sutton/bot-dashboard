@@ -1,13 +1,4 @@
 /**
- * Checks the add bot modal contains the correct information/structure
- * @returns {cy.chain}
- */
-const checkAddBotModal = () => {
-    cy.get('[data-cy=add-bot-modal]').should('be.visible');
-    return cy.get('.modal-title').contains('Add a bot').should('be.visible');
-};
-
-/**
  * Fills in the addBotModal with the input information
  */
 const fillAddBotModal = (name, description, subreddit='hiphopheads') => {
@@ -39,6 +30,12 @@ describe('Application dashboard test suite', function() {
 
         // The user is directed to an add bot url
         cy.url().should('contain', 'add');
+
+        // They make an error submitting the form and the relavent errors are displayed
+        cy.get('[data-cy=add-bot-btn]').click();
+        cy.contains('This field is required');
+
+        // They correct their errors and fill out the form
         fillAddBotModal('New Bot', 'New Bot Description');
 
         // After clicking submit they see that the new bot is in the bot list
