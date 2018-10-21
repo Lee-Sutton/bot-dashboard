@@ -5,8 +5,10 @@ import {Meteor} from 'meteor/meteor';
 import '/imports/startup/server/register-api';
 
 import BootstrapVue from 'bootstrap-vue';
+import VeeValidate from 'vee-validate';
 
 Vue.use(BootstrapVue);
+Vue.use(VeeValidate);
 
 window.Tracker = {};
 window.Meteor = Meteor;
