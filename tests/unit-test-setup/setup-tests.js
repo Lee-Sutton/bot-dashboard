@@ -6,7 +6,9 @@ import '/imports/startup/server/register-api';
 
 import BootstrapVue from 'bootstrap-vue';
 import VeeValidate from 'vee-validate';
+import VueSelect from 'vue-select';
 
+Vue.component('v-select', VueSelect);
 Vue.use(BootstrapVue);
 Vue.use(VeeValidate);
 

@@ -3,7 +3,7 @@
  */
 const fillAddBotModal = (name, description, subreddit='hiphopheads') => {
     cy.get('#name').clear().type(name);
-    cy.get('#subreddit').clear().type(subreddit);
+    cy.get('.vs__selected-options > .form-control').clear().type(`${subreddit}{enter}`);
     cy.get('#keyword').clear().type('FRESH');
     cy.get('#minimumScore').clear().type('100');
     cy.get('#bot-description').clear().type(description);
