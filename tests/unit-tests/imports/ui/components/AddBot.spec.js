@@ -32,9 +32,9 @@ describe('#AddBot component spec', () => {
 
             // The user fills in the inputs
             wrapper.find('#name').setValue(dummyBot.name);
-            wrapper.find('#subreddit').setValue(dummyBot.subreddit);
             wrapper.find('#keyword').setValue(dummyBot.keyword);
             wrapper.find('#minimumScore').setValue(dummyBot.minimumScore);
+            wrapper.vm.subreddit = dummyBot.subreddit;
         });
 
         it('should render', () => {

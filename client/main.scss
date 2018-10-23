@@ -1,0 +1,9 @@
+//@import "{}/imports/ui/stylesheets/not-found.less";
+
+/*prevent bootstrap-vue css conflict*/
+.v-select.dropdown .dropdown-toggle::after {
+  content: inherit;
+}
+.v-select.dropdown .form-control {
+  height: inherit;
+}

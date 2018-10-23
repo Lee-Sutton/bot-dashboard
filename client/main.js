@@ -11,9 +11,11 @@ import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VeeValidate from 'vee-validate';
+import VueSelect from 'vue-select';
 
 Vue.use(VeeValidate);
 Vue.use(BootstrapVue);
+Vue.component('v-select', VueSelect);
 
 Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL',
