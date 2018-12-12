@@ -5,6 +5,10 @@ import {BotResult} from '../bot-results/bot-results';
 
 export const Bots = new Mongo.Collection('bots');
 
+// TODO Create a wrapper class with the schema
+// TODO client side validation and async await for client side inserts
+// TODO Remove validated methods instead create default CRUD operations accessible from client side
+// TODO Client side meteor methods should use async await
 export const Bot = Class.create({
     name: 'Bot',
     collection: Bots,

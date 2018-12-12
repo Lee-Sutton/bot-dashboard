@@ -1,56 +1,56 @@
 
-import {RouterLinkStub, mount} from '@vue/test-utils';
-import {Meteor} from 'meteor/meteor';
-import {Bot} from '/imports/api/bots/bots';
+import {routerlinkstub, mount} from '@vue/test-utils';
+import {meteor} from 'meteor/meteor';
+import {bot} from '/imports/api/bots/bots';
 import '/imports/startup/client/vue-plugins';
 
-import BotList from '/imports/ui/components/bot-list/BotList.vue';
+import botlist from '/imports/ui/components/bot-list/botlist.vue';
 
-describe('#BotList component spec', () => {
+describe('#botlist component spec', () => {
     let bot = {
         subreddit: 'testing',
         name: 'dummy name',
         keyword: 'dummy key',
-        minimumScore: 100,
-        _id: 'dummyId',
+        minimumscore: 100,
+        _id: 'dummyid',
         remove: jest.fn(),
         results() {
             return {
-              count: jest.fn().mockReturnValue(10)
+              count: jest.fn().mockreturnvalue(10)
             }
         }
     };
 
-    beforeEach(() => {
-        jest.resetAllMocks();
-        Bot.find.mockReturnValue([bot]);
+    beforeeach(() => {
+        jest.resetallmocks();
+        bot.find.mockreturnvalue([bot]);
     });
 
     it('it should welcome the user if they are not logged in', () => {
-        Meteor.user.mockReturnValue(false);
-        let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
-        expect(wrapper.html()).toContain('Welcome')
+        meteor.user.mockreturnvalue(false);
+        let wrapper = mount(botlist, {stubs: {routerlink: routerlinkstub}});
+        expect(wrapper.html()).tocontain('welcome')
     });
 
-    it('should subscribe to bots.all and botResultsCount', function () {
-        mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
-        expect(Meteor.mockSubscribe).toBeCalledWith('bots.all');
-        expect(Meteor.mockSubscribe).toBeCalledWith('botResultCount');
+    it('should subscribe to bots.all and botresultscount', function () {
+        mount(botlist, {stubs: {routerlink: routerlinkstub}});
+        expect(meteor.mocksubscribe).tobecalledwith('bots.all');
+        expect(meteor.mocksubscribe).tobecalledwith('botresultcount');
     });
 
     it('should show the list of bots if the user is logged in', function () {
-        Meteor.user.mockReturnValue(true);
-        let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}}),
-            routerStub = wrapper.findAll(RouterLinkStub);
+        meteor.user.mockreturnvalue(true);
+        let wrapper = mount(botlist, {stubs: {routerlink: routerlinkstub}}),
+            routerstub = wrapper.findall(routerlinkstub);
 
-        expect(wrapper.html()).toContain(bot.subreddit);
-        expect(wrapper.html()).toContain(bot.keyword);
-        expect(wrapper.html()).toContain(bot.minimumScore);
-        expect(wrapper.html()).toContain(bot.name);
-        expect(wrapper.html()).toContain(bot.results().count());
-        expect(routerStub.at(0).props().to).toBe('/add');
-        expect(routerStub.at(1).props().to).toEqual({name: 'results', params: {id: bot._id}});
-        expect(routerStub.at(2).props().to).toEqual({name: 'add', params: {bot}});
+        expect(wrapper.html()).tocontain(bot.subreddit);
+        expect(wrapper.html()).tocontain(bot.keyword);
+        expect(wrapper.html()).tocontain(bot.minimumscore);
+        expect(wrapper.html()).tocontain(bot.name);
+        expect(wrapper.html()).tocontain(bot.results().count());
+        expect(routerstub.at(0).props().to).tobe('/add');
+        expect(routerstub.at(1).props().to).toequal({name: 'results', params: {id: bot._id}});
+        expect(routerstub.at(2).props().to).toequal({name: 'add', params: {bot}});
 
     });
 });
