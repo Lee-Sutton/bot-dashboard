@@ -1,9 +1,6 @@
 import {mount} from '@vue/test-utils';
-import toBeType from "jest-tobetype";
 import NotificationModal from '/imports/ui/components/notification-modal/NotificationModal';
 import {Bot, setNotification} from '/imports/api/bots/bots';
-
-expect.extend({toBeType});
 
 describe('NotificationModalSpec', () => {
     let wrapper;

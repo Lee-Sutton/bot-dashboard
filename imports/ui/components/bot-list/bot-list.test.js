@@ -40,15 +40,12 @@ describe.only('#botlist component spec', () => {
 
         it('it should welcome the user if they are not logged in', () => {
             td.when(meteorUser()).thenReturn(null);
-
             let wrapper = mount(botlist, {stubs: {routerlink: routerlinkstub}});
             expect(wrapper.html()).to.contain('welcome')
         });
 
         it('should show the list of bots if the user is logged in', function () {
-            // FIXME insert bot into the database
             let wrapper = mount(botlist, {stubs: {routerlink: routerlinkstub}});
-
             expect(wrapper.html()).to.contain(bot.subreddit);
             expect(wrapper.html()).to.contain(bot.keyword);
             expect(wrapper.html()).to.contain(bot.minimumscore);
