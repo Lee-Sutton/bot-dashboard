@@ -40,7 +40,7 @@ jobs:
             java -version
       - run:
           name: install npm packages
-          command: meteor npm ci
+          command: meteor npm i
       - run:
           name: start app and run E2E tests
           command: meteor npm run test
