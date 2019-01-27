@@ -51,6 +51,12 @@ describe('#BotList component spec', () => {
         expect(routerStub.at(0).props().to).toBe('/add');
         expect(routerStub.at(1).props().to).toEqual({name: 'results', params: {id: bot._id}});
         expect(routerStub.at(2).props().to).toEqual({name: 'add', params: {bot}});
+    });
+    it('should allow users to delete bots', function () {
+        Meteor.user.mockReturnValue(true);
+        let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
+
+        wrapper.find('[data-cy=delete-bot0').trigger('click');
 
     });
 });

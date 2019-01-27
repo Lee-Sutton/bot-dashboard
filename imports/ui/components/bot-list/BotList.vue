@@ -15,7 +15,7 @@
                     <td>Actions</td>
                 </tr>
                 </thead>
-                <tbody v-for="bot in bots">
+                <tbody v-for="(bot, index) in bots">
                 <tr>
                     <th scope="row">
                     </th>
@@ -28,6 +28,7 @@
                     <td>{{bot.minimumScore}}</td>
                     <td>
                         <router-link :to="{name: 'add', params: {bot}}" class="btn btn-secondary">Edit</router-link>
+                        <button class="btn btn-danger" :data-cy="'delete-bot' + index">Delete</button>
                     </td>
                 </tr>
                 </tbody>

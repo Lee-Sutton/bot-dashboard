@@ -5,6 +5,9 @@ describe('User accounts test suite', function() {
     });
 
     it('should allow the user to login', function () {
+        // The user visits bots dashboard page
+        cy.get('body').contains('Sign in or create an account to get started').should('be.visible');
+
         cy.seedTestUsers();
 
         let email = 'john@mailinator.com',

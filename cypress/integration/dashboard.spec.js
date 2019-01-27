@@ -16,15 +16,10 @@ describe('Application dashboard test suite', function() {
         cy.visit('/');
         cy.resetDatabase();
         cy.seedTestUsers();
+        cy.login();
     });
 
     it('Should allow the user to create bots', function() {
-        // The user visits bots dashboard page
-        cy.get('body').contains('Sign in or create an account to get started').should('be.visible');
-
-        // They haven't signed in but they notice a link
-        cy.login();
-
         // They want to add a new bot
         cy.get('[data-cy=add-bot]').click({force: true, timeout: 10000});
 
@@ -74,6 +69,29 @@ describe('Application dashboard test suite', function() {
         cy.get('[data-cy=notifications]').click();
         cy.get('[type=checkbox]').click({force: true});
         cy.contains('Save').click();
+    });
+
+    it.only('should allow the user to delete bots', function () {
+        const bot = {
+            name: 'New Bot',
+            description: 'Dummy Description'
+        };
+
+        // They want to add a new bot
+        cy.get('[data-cy=add-bot]').click({force: true, timeout: 10000});
+
+        // The user is directed to an add bot url
+        cy.url().should('contain', 'add');
+        fillAddBotModal(bot.name, bot.description);
+
+        // The user sees their bot listed in the table
+        cy.get('[data-cy=bot-list]').contains(bot.name).should('be.visible');
+
+        // The user decides they want to delete the bot
+        cy.get('[data-cy=delete-bot0]').click();
+
+        // The bot is no longer listed and the welcome message is shown
+        cy.get('[data-cy=welcome-message]').should('be.visible');
     });
 });
 
