@@ -62,3 +62,11 @@ export const updateBot = new ValidatedMethod({
         return Bot.update({_id: bot._id}, {$set: bot});
     }
 });
+
+export const deleteBot = new ValidatedMethod({
+    name: 'deleteBot',
+    validate () {},
+    run (bot) {
+        Bot.remove(bot);
+    }
+});

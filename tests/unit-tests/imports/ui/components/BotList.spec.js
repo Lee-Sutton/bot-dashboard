@@ -1,7 +1,7 @@
 
 import {RouterLinkStub, mount} from '@vue/test-utils';
 import {Meteor} from 'meteor/meteor';
-import {Bot} from '/imports/api/bots/bots';
+import {Bot, deleteBot} from '/imports/api/bots/bots';
 import '/imports/startup/client/vue-plugins';
 
 import BotList from '/imports/ui/components/bot-list/BotList.vue';
@@ -57,6 +57,6 @@ describe('#BotList component spec', () => {
         let wrapper = mount(BotList, {stubs: {RouterLink: RouterLinkStub}});
 
         wrapper.find('[data-cy=delete-bot0').trigger('click');
-
+        expect(deleteBot.call).toHaveBeenCalled();
     });
 });
