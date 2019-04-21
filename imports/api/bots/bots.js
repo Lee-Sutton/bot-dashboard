@@ -2,6 +2,8 @@ import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
 import {BotResult} from '../bot-results/bot-results';
+// import 'meteor/jagi:astronomy-softremove-behavior'
+import "meteor/jagi:astronomy-softremove-behavior";
 
 export const Bots = new Mongo.Collection('bots');
 
@@ -21,15 +23,31 @@ export const Bot = Class.create({
         }
     },
     helpers: {
-        results () {
+        results() {
             return BotResult.find({botId: this._id});
+        }
+    },
+    meteorMethods: {
+        delete() {
+            return this.softRemove();
+        }
+    },
+    behaviors: {
+        softremove: {
+            // The field name with a flag for marking a document as removed.
+            removedFieldName: 'removed',
+            // A flag indicating if a "removedAt" field should be present in a document.
+            hasRemovedAtField: true,
+            // The field name storing the removal date.
+            removedAtFieldName: 'removedAt'
         }
     }
 });
 
 export const insertBot = new ValidatedMethod({
     name: 'insertBot',
-    validate (bot) {},
+    validate(bot) {
+    },
     run(bot) {
         if (!Meteor.user()) {
             throw new Meteor.Error('user not logged in');
@@ -41,7 +59,8 @@ export const insertBot = new ValidatedMethod({
 
 export const setNotification = new ValidatedMethod({
     name: 'setNotification',
-    validate () {},
+    validate() {
+    },
     run({bot, notification}) {
         if (!Meteor.user()) {
             throw new Meteor.Error('user not logged in');
@@ -53,8 +72,9 @@ export const setNotification = new ValidatedMethod({
 
 export const updateBot = new ValidatedMethod({
     name: 'updateBot',
-    validate () {},
-    run (bot) {
+    validate() {
+    },
+    run(bot) {
         if (!Meteor.user()) {
             throw new Meteor.Error('user not logged in');
         }
@@ -63,10 +83,3 @@ export const updateBot = new ValidatedMethod({
     }
 });
 
-export const deleteBot = new ValidatedMethod({
-    name: 'deleteBot',
-    validate () {},
-    run (bot) {
-        Bot.remove(bot);
-    }
-});

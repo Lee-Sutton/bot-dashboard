@@ -1,10 +1,10 @@
 import {Meteor} from 'meteor/meteor';
-import {seedTestUsers} from "../../startup/server/fixtures";
+import {seedTestUsers} from '/imports/startup/both/fixtures';
 import {expect} from 'chai';
 import {User} from './users.js';
 
 if (Meteor.isServer) {
-    describe('users collection', function() {
+    describe('users collection', function () {
         Meteor.users.remove({});
         seedTestUsers();
         it('should return the primary email address', function () {

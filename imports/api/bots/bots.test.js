@@ -198,11 +198,8 @@ if (Meteor.isServer) {
 
             it('softRemove the bot', function () {
                 let bot = Bot.findOne({_id: botId});
-                deleteBot.call({bot});
-
-                let updatedBot = Bot.findOne({_id: botId});
-                console.log(updatedBot);
-                expect(updatedBot).to.be.undefined;
+                bot.delete();
+                expect(Bot.findOne({_id: botId})).to.be.undefined;
             });
         });
     });
