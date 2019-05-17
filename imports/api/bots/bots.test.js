@@ -13,6 +13,42 @@ const botFixture = () => {
     }
 };
 
+if (Meteor.isClient) {
+    describe.only('#Bot meteor methods', function () {
+        let userId = '234567fjdsakl',
+            meteorUser;
+
+        beforeEach(function () {
+            meteorUser = td.replace(Meteor, 'user');
+            td.when(meteorUser()).thenReturn({_id: userId})
+        });
+
+        afterEach(function () {
+            td.reset();
+        });
+
+        describe('#create', function () {
+            it('should create a bot', function () {
+                const bot = new Bot(botFixture());
+                const _id = bot.create();
+                console.log(_id);
+                expect(_id).to.be.ok;
+            });
+
+            it('Throws if the user is not logged in', function() {
+                td.when(meteorUser()).thenReturn(undefined);
+
+                let invalidCall = () => {
+                    let bot = new Bot(botFixture());
+                    return bot.create();
+                };
+
+                expect(invalidCall).to.throw();
+            });
+        });
+    });
+}
+
 if (Meteor.isServer) {
     describe('bots collection', function () {
         let botId,

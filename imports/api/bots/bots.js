@@ -2,7 +2,6 @@ import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
 import {BotResult} from '../bot-results/bot-results';
-// import 'meteor/jagi:astronomy-softremove-behavior'
 import "meteor/jagi:astronomy-softremove-behavior";
 
 export const Bots = new Mongo.Collection('bots');
@@ -28,6 +27,12 @@ export const Bot = Class.create({
         }
     },
     meteorMethods: {
+        create() {
+            if (!Meteor.user()) {
+                throw new Meteor.Error('Permission Denied');
+            }
+            return this.save();
+        },
         delete() {
             return this.softRemove();
         }
