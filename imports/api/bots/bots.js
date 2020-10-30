@@ -67,6 +67,6 @@ export const deleteBot = new ValidatedMethod({
     name: 'deleteBot',
     validate () {},
     run (bot) {
-        Bot.remove(bot);
+        Bot.remove({_id: bot._id});
     }
 });

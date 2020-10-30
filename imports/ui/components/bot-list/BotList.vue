@@ -28,7 +28,7 @@
                     <td>{{bot.minimumScore}}</td>
                     <td>
                         <router-link :to="{name: 'add', params: {bot}}" class="btn btn-secondary">Edit</router-link>
-                        <button class="btn btn-danger" :data-cy="'delete-bot' + index">Delete</button>
+                        <button class="btn btn-danger" :data-cy="'delete-bot' + index" @click="deleteBot(bot)">Delete</button>
                     </td>
                 </tr>
                 </tbody>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import {Bot} from '/imports/api/bots/bots';
+    import {Bot, deleteBot} from '/imports/api/bots/bots';
     import Welcome from '/imports/ui/components/welcome/Welcome.vue'
     import {Meteor} from 'meteor/meteor';
 
@@ -61,12 +61,26 @@
                 return !!Meteor.user();
             }
         },
+        methods: {
+            deleteBot(bot) {
+                deleteBot.call(bot, err => {
+                    if (err) {
+                        this.$notify({
+                            group: 'sAlert',
+                            type: 'Danger',
+                            title: 'Error deleting bot',
+                            text: err,
+                        });
+                    }
+                });
+            }
+        }
     }
 </script>
 
 <style>
-    body {
-        margin: 30px;
+body {
+    margin: 30px;
     }
     a {
         color: #40b883;
