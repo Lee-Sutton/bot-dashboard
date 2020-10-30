@@ -1,5 +1,5 @@
 import {assert, expect} from 'chai';
-import {Bot, insertBot, setNotification, updateBot, deleteBot} from './bots.js';
+import {Bot, insertBot, setNotification, updateBot} from './bots.js';
 import td from 'testdouble';
 import {Meteor} from 'meteor/meteor';
 import {BotResults} from "../bot-results/bot-results";
@@ -114,7 +114,6 @@ describe('bots collection', function () {
         });
     });
 
-
     describe('#updateBot meteor method', function () {
         let userId = '234567fjdsakl',
             meteorUser,
@@ -178,30 +177,6 @@ describe('bots collection', function () {
 
             let updatedBot = Bot.findOne({_id: botId});
             expect(updatedBot.notification).to.eq(true);
-        });
-    });
-
-    describe('#deleteBot meteor method', function () {
-        let userId = '234567fjdsakl',
-            meteorUser;
-
-        beforeEach(function () {
-            Bot.remove({});
-            const bot = new Bot(dummyBot);
-
-            botId = bot.save();
-
-            meteorUser = td.replace(Meteor, 'user');
-            td.when(meteorUser()).thenReturn({_id: userId})
-        });
-
-        it('softRemove the bot', function () {
-            let bot = Bot.findOne({_id: botId});
-            deleteBot.call({bot});
-
-            let updatedBot = Bot.findOne({_id: botId});
-            console.log(updatedBot);
-            expect(updatedBot).to.be.undefined;
         });
     });
 });
