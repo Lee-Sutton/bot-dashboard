@@ -3,7 +3,7 @@ import snoowrap from 'snoowrap';
 const DEFAULT_SNOO = new snoowrap({
     clientId: '1N5T8Noo3BgQrA',
     clientSecret: 'V_vLG2NLfe4jdiGvaZ6zWh9BHDI',
-    password: 'LucyDog2009',
+    password: 'ilovekeela',
     username: 'hip_hop_bot',
     userAgent: 'HipHopBot 0.1',
 });
